@@ -5,3 +5,4 @@
 /.tx/ export-ignore
 /language/*.pot export-ignore
 /language/*.po export-ignore
+/CODE_OF_CONDUCT.md
