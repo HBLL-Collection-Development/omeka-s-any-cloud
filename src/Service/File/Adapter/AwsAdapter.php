@@ -5,11 +5,12 @@ namespace AnyCloud\Service\File\Adapter;
 use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
 use League\Flysystem\AwsS3v3\AwsS3Adapter;
-use Omeka\File\Exception\ConfigException;
 
 class AwsAdapter implements AdapterInterface
 {
-    private $options;
+    use Common;
+
+    protected $options;
     private $client;
 
     /**
@@ -20,40 +21,28 @@ class AwsAdapter implements AdapterInterface
         $this->options = $options;
         $this->createClient();
 
-        return new AwsS3Adapter($this->client, $options['aws_bucket']);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function optionExists($option, $allowNull = false)
-    {
-        if (isset($this->options[$option]) || $allowNull === true) {
-            return true;
-        } else {
-            throw new ConfigException("Any Cloud Error: Option `$option` has not been properly set.\n".$e."\n");
-        }
+        return new AwsS3Adapter($this->client, $options['bucket']);
     }
 
     private function createClient()
     {
-        $this->optionExists('aws_key');
-        $this->optionExists('aws_secret_key');
-        $this->optionExists('aws_bucket');
-        $this->optionExists('aws_region');
-        $version = isset($this->options['aws_version']) ? $this->options['aws_version'] : 'latest';
+        $this->optionExists('key');
+        $this->optionExists('secret_key');
+        $this->optionExists('bucket');
+        $this->optionExists('region');
+        $version = isset($this->options['version']) ? $this->options['version'] : 'latest';
 
         try {
             $clientArray = [
                 'credentials' => [
-                    'key' => $this->options['aws_key'],
-                    'secret' => $this->options['aws_secret_key'],
+                    'key' => $this->options['key'],
+                    'secret' => $this->options['secret_key'],
                 ],
-                'region' => $this->options['aws_region'],
+                'region' => $this->options['region'],
                 'version' => $version,
             ];
-            $endpoint = $this->optionExists('aws_endpoint', true);
-            $clientArray['endpoint'] = ($endpoint && !empty($this->options['aws_endpoint']) && $this->options['aws_endpoint'] !== '') ? $this->options['aws_endpoint'] : null;
+            $endpoint = $this->optionExists('endpoint', true);
+            $clientArray['endpoint'] = ($endpoint && !empty($this->options['endpoint']) && $this->options['endpoint'] !== '') ? $this->options['endpoint'] : null;
             $this->client = new S3Client($clientArray);
         } catch (AwsException $e) {
             echo 'AWS Error: '.$e->getMessage()."\n";

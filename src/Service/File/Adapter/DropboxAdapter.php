@@ -8,7 +8,9 @@ use Omeka\File\Exception\ConfigException;
 
 class DropboxAdapter implements AdapterInterface
 {
-    private $options;
+    use Common;
+
+    protected $options;
     private $client;
     private $uri;
 
@@ -21,18 +23,6 @@ class DropboxAdapter implements AdapterInterface
         $this->createClient();
 
         return new FlyDropboxAdapter($this->client);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function optionExists($option, $allowNull = false)
-    {
-        if (isset($this->options[$option]) || $allowNull === true) {
-            return true;
-        } else {
-            throw new ConfigException("Any Cloud Error: Option `$option` has not been properly set.\n".$e."\n");
-        }
     }
 
     /**

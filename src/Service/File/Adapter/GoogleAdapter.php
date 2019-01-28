@@ -8,7 +8,9 @@ use Omeka\File\Exception\ConfigException;
 
 class GoogleAdapter implements AdapterInterface
 {
-    private $options;
+    use Common;
+
+    protected $options;
     private $client;
 
     /**
@@ -31,18 +33,6 @@ class GoogleAdapter implements AdapterInterface
     public function getUri()
     {
         return $this->options['google_storage_uri'].'/'.$this->options['google_bucket_name'];
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function optionExists($option, $allowNull = false)
-    {
-        if (isset($this->options[$option]) || $allowNull === true) {
-            return true;
-        } else {
-            throw new ConfigException("Any Cloud Error: Option `$option` has not been properly set.\n".$e."\n");
-        }
     }
 
     /**

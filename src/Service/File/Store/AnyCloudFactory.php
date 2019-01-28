@@ -74,7 +74,7 @@ class AnyCloudFactory implements FactoryInterface
             case 'aws':
             case 'digital_ocean':
             case 'scaleway_object_storage':
-                $this->uri = dirname($this->filesystem->getAdapter()->getClient()->getObjectUrl($options['aws_bucket'], $options['aws_key']));
+                $this->uri = dirname($this->filesystem->getAdapter()->getClient()->getObjectUrl($options['bucket'], $options['key']));
                 break;
             case 'azure':
                 $this->uri = $this->tempUri;

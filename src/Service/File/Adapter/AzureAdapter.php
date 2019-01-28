@@ -8,7 +8,9 @@ use Omeka\File\Exception\ConfigException;
 
 class AzureAdapter implements AdapterInterface
 {
-    private $options;
+    use Common;
+
+    protected $options;
     private $client;
 
     /**
@@ -33,18 +35,6 @@ class AzureAdapter implements AdapterInterface
             $this->createClient();
         }
         return empty($options['azure_endpoint']) ? 'https://'.$options['azure_account_name'].'.blob.core.windows.net/'.$options['azure_container_name'] : $options['azure_endpoint'];
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function optionExists($option, $allowNull = false)
-    {
-        if (isset($this->options[$option]) || $allowNull === true) {
-            return true;
-        } else {
-            throw new ConfigException("Any Cloud Error: Option `$option` has not been properly set.\n".$e."\n");
-        }
     }
 
     /**

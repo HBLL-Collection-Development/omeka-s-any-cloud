@@ -15,20 +15,7 @@ It is recommended that once you pick an external storage service you continue us
 # Installation and Configuration
 1. Install the plugin by [downloading and unzipping the latest module](https://github.com/HBLL-Collection-Development/omeka-s-any-cloud/releases) and loading it into the `modules` directory of your Omeka S instance.
 2. Enable the plugin from the Admin side of your installation under "Modules".
-3. Make the following changes to your `config/local.config.php` file:
-
-Change the `Omeka\File\Store` alias to the following:
-
-```php
-'service_manager' => [
-        'aliases' => [
-            'Omeka\File\Store' => 'AnyCloud\File\Store\AnyCloud', // change this
-            'Omeka\File\Thumbnailer' => 'Omeka\File\Thumbnailer\ImageMagick', // this stays the same
-        ],
-    ],
-```
-
-Add one of the following sections to your `config/local.config.php` file:
+3. Add one of the following sections to your `config/local.config.php` file:
 
 ## Amazon S3 Storage, DigitalOcean Spaces, and Scaleway Object Storage
 
@@ -36,12 +23,12 @@ All 3 of these services are set up as though they are an Amazon S3 Storage syste
 
 ```php
 'any_cloud' => [
-    'adapter' => 'aws',
-    'aws_key' => 'YOUR KEY',
-    'aws_secret_key' => 'YOUR SECRET KEY',
-    'aws_bucket' => 'YOUR BUCKET NAME',
-    'aws_region' => 'YOUR BUCKET REGION',
-    'aws_endpoint' => '', // can leave blank unless you have set up custom endpoint URLs
+    'adapter' => 'aws', // or `digital_ocean` or `scaleway_object_storage`
+    'key' => 'YOUR KEY',
+    'secret_key' => 'YOUR SECRET KEY',
+    'bucket' => 'YOUR BUCKET NAME',
+    'region' => 'YOUR BUCKET REGION',
+    'endpoint' => '', // can leave blank unless you have set up custom endpoint URLs
 ],
 ```
 
@@ -111,7 +98,7 @@ See online issues on the [module issues](https://github.com/HBLL-Collection-Deve
 
 # TODO
 
-1. - [ ] Remove need for users to manually change the alias in `config/local.config.php`
+1. - [X] Remove need for users to manually change the alias in `config/local.config.php` (v0.2.0)
 2. - [ ] Move all config data to a form so users can use the admin module system to enter their credentials without the need to access server files
 3. - [ ] Provide more detailed instructions on setting up each cloud storage system (possibly using the GitHub wiki)
 

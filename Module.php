@@ -15,6 +15,16 @@ class Module extends AbstractModule
     public function onBootstrap(MvcEvent $event)
     {
         parent::onBootstrap($event);
+        $this->setFileStoreAlias();
         require __DIR__ . '/vendor/autoload.php';
+    }
+
+    /**
+     * Override default file store alias to use Any Cloud module for uploads instead
+     */
+    protected function setFileStoreAlias()
+    {
+        $serviceLocator = $this->getServiceLocator();
+        $serviceLocator->setAlias('Omeka\File\Store', File\Store\AnyCloud::class);
     }
 }

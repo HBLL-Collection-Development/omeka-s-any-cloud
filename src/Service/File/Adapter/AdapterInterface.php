@@ -26,6 +26,8 @@ interface AdapterInterface
      *
      * return bool `true` if value exists or is allowed to be `null`
      *
+     * @return bool
+     *
      * throws ConfigException if option not set correctly
      */
     public function optionExists($option, $allowNull = false);
