@@ -36,7 +36,7 @@ See online issues on the [module issues](https://github.com/HBLL-Collection-Deve
 
 # TODO
 1. - [X] Remove need for users to manually change the alias in `config/local.config.php` (v0.2.0)
-2. - [X] Move all config data to a form so users can use the admin module system to enter their credentials without the need to access server files
+2. - [X] Move all config data to a form so users can use the admin module system to enter their credentials without the need to access server files (v0.2.0)
 3. - [ ] Provide more detailed instructions on setting up each cloud storage system (possibly using the GitHub wiki)
 
 # Possible Enhancements

@@ -5,7 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-## [v0.2.0]
+### Changed
+- Upped version number to `v0.3.0`
+
+## [v0.2.0] - 2019-01-29
 ### Removed
 - Removed the need for users to manually change the file store alias in `config/local.config.php`
 
