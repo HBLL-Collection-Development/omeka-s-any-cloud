@@ -4,12 +4,16 @@ namespace AnyCloud\Service\File\Store;
 
 use AnyCloud\File\Store\AnyCloud;
 use AnyCloud\Service\File\Adapter;
+use AnyCloud\Traits\CommonTrait;
 use League\Flysystem\Filesystem;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 class AnyCloudFactory implements FactoryInterface
 {
+    use CommonTrait;
+
+    protected $options;
     private $filesystem;
     private $uri;
     private $tempUri;
@@ -24,39 +28,39 @@ class AnyCloudFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $serviceLocator, $requestedName, array $options = null)
     {
-        $config = $serviceLocator->get('Config');
-        $this->createFilesystem($config['any_cloud']);
-        $this->createUri($config['any_cloud']);
+        $this->options = $serviceLocator->get('Omeka\Settings');
+        $this->createFilesystem();
+        $this->createUri();
 
-        return new AnyCloud($this->filesystem, $config, $this->uri, $this->adapter);
+        return new AnyCloud($this->filesystem, $this->options, $this->uri, $this->adapter);
     }
 
-    private function createFilesystem($options)
+    private function createFilesystem()
     {
-        $adapterOptions = $options['adapter'];
-        switch ($adapterOptions) {
+        $adapterName = $this->getSetting('adapter');
+        switch ($adapterName) {
             case 'aws':
             case 'digital_ocean':
             case 'scaleway_object_storage':
-                $aws = new Adapter\AwsAdapter;
-                $this->adapter = $aws->createAdapter($options);
+                $aws           = new Adapter\AwsAdapter;
+                $this->adapter = $aws->createAdapter($this->options);
                 break;
             case 'azure':
-                $azure = new Adapter\AzureAdapter;
+                $azure         = new Adapter\AzureAdapter;
                 $this->adapter = $azure->createAdapter($options);
                 $this->tempUri = $azure->getUri();
                 break;
             case 'rackspace':
-                $rackspace = new Adapter\RackspaceAdapter;
+                $rackspace     = new Adapter\RackspaceAdapter;
                 $this->adapter = $rackspace->createAdapter($options);
                 $this->tempUri = $rackspace->getUri();
                 break;
             case 'dropbox':
-                $dropbox = new Adapter\DropboxAdapter;
+                $dropbox       = new Adapter\DropboxAdapter;
                 $this->adapter = $dropbox->createAdapter($options);
                 break;
             case 'google':
-                $google = new Adapter\GoogleAdapter;
+                $google        = new Adapter\GoogleAdapter;
                 $this->adapter = $google->createAdapter($options);
                 $this->tempUri = $google->getUri();
                 break;
@@ -67,14 +71,15 @@ class AnyCloudFactory implements FactoryInterface
         $this->filesystem = new Filesystem($this->adapter);
     }
 
-    private function createUri($options)
+    private function createUri()
     {
-        $adapterOptions = $options['adapter'];
-        switch ($adapterOptions) {
+        $adapterName = $this->getSetting('adapter');
+        switch ($adapterName) {
             case 'aws':
             case 'digital_ocean':
             case 'scaleway_object_storage':
-                $this->uri = dirname($this->filesystem->getAdapter()->getClient()->getObjectUrl($options['bucket'], $options['key']));
+                $this->uri = dirname($this->filesystem->getAdapter()->getClient()->getObjectUrl($this->getSetting($adapterName.'_bucket'),
+                    $this->getSetting($adapterName.'_key')));
                 break;
             case 'azure':
                 $this->uri = $this->tempUri;

@@ -2,13 +2,14 @@
 
 namespace AnyCloud\Service\File\Adapter;
 
+use AnyCloud\Traits\CommonTrait;
 use OpenCloud\OpenStack;
 use League\Flysystem\Rackspace\RackspaceAdapter as RSAdapter;
 use Omeka\File\Exception\ConfigException;
 
 class RackspaceAdapter implements AdapterInterface
 {
-    use Common;
+    use CommonTrait;
 
     protected $options;
     private $client;

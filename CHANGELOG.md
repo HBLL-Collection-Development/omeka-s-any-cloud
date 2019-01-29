@@ -11,8 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upped version number to `v0.2.0`
 - Updated `README.md`
+- Allow settings to be configurable by the user
+- Changed the names of variables used to set up adapters (breaking change)
 - Moved reused adapter code to a trait (`src/Service/File/Adapter/Common.php`)
-- Changed the names of variables used to set up adapters based on Amazon Web Services (breaking change)
+- Updated `.gitignore` file to ignore `CHANGELOG.md` when exporting project
 
 ### Added
 - Added `CHANGELOG.md`

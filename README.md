@@ -22,7 +22,7 @@ It is recommended that once you pick an external storage service you continue us
 All 3 of these services are set up as though they are an Amazon S3 Storage system:
 
 ```php
-'any_cloud' => [
+'anycloud' => [
     'adapter' => 'aws', // or `digital_ocean` or `scaleway_object_storage`
     'key' => 'YOUR KEY',
     'secret_key' => 'YOUR SECRET KEY',
@@ -35,7 +35,7 @@ All 3 of these services are set up as though they are an Amazon S3 Storage syste
 ## Microsoft Azure Storage
 
 ```php
-'any_cloud' => [
+'anycloud' => [
     'adapter' => 'azure',
     'azure_account_name' => 'YOUR_ACCOUNT_NAME',
     'azure_account_key' => 'YOUR ACCOUNT KEY',
@@ -51,7 +51,7 @@ The Rackspace Files adapter currently relies on an outdated version of the Guzzl
 There is also an authentication issue if you use Multi-Factor Authentication (MFA). MFA must be disabled on your account for this adapter to work. Hopefully both of these issues are addressed soon.
 
 ```php
-'any_cloud' => [
+'anycloud' => [
     'adapter' => 'rackspace',
     'rackspace_identity_endpoint' => 'YOUR ENDPOINT', // 2 valid options are `US_IDENTITY_ENDPOINT` or `UK_IDENTITY_ENDPOINT`
     'rackspace_username' => 'YOUR USERNAME',
@@ -66,7 +66,7 @@ There is also an authentication issue if you use Multi-Factor Authentication (MF
 Sign up for a Dropbox developer account, create an app and get an access token. Your app only needs access to one folder and not your entire Dropbox unless you plan on saving things in lots of different places in Dropbox.
 
 ```php
-'any_cloud' => [
+'anycloud' => [
     'adapter' => 'dropbox',
     'dropbox_access_token' => 'YOUR ACCESS TOKEN,
 ],
@@ -75,7 +75,7 @@ Sign up for a Dropbox developer account, create an app and get an access token. 
 ## Google Cloud storage
 
 ```php
-'any_cloud' => [
+'anycloud' => [
     'adapter' => 'google',
     'google_project_id' => 'YOUR PROJECT ID',
     'google_bucket_name' => 'YOUR BUCKET NAME',
@@ -105,3 +105,4 @@ See online issues on the [module issues](https://github.com/HBLL-Collection-Deve
 # Possible Enhancements
 
 1. - [ ] Add more cloud adapters (OneDrive, Box.com)
+2. - [ ] Allow migration between different cloud platforms

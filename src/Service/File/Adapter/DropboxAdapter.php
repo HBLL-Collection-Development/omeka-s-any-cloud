@@ -2,13 +2,14 @@
 
 namespace AnyCloud\Service\File\Adapter;
 
+use AnyCloud\Traits\CommonTrait;
 use Spatie\Dropbox\Client;
 use Spatie\FlysystemDropbox\DropboxAdapter as FlyDropboxAdapter;
 use Omeka\File\Exception\ConfigException;
 
 class DropboxAdapter implements AdapterInterface
 {
-    use Common;
+    use CommonTrait;
 
     protected $options;
     private $client;

@@ -2,13 +2,14 @@
 
 namespace AnyCloud\Service\File\Adapter;
 
+use AnyCloud\Traits\CommonTrait;
 use Google\Cloud\Storage\StorageClient;
 use Superbalist\Flysystem\GoogleStorage\GoogleStorageAdapter;
 use Omeka\File\Exception\ConfigException;
 
 class GoogleAdapter implements AdapterInterface
 {
-    use Common;
+    use CommonTrait;
 
     protected $options;
     private $client;

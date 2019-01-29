@@ -2,13 +2,14 @@
 
 namespace AnyCloud\Service\File\Adapter;
 
+use AnyCloud\Traits\CommonTrait;
 use League\Flysystem\AzureBlobStorage\AzureBlobStorageAdapter;
 use MicrosoftAzure\Storage\Blob\BlobRestProxy;
 use Omeka\File\Exception\ConfigException;
 
 class AzureAdapter implements AdapterInterface
 {
-    use Common;
+    use CommonTrait;
 
     protected $options;
     private $client;
