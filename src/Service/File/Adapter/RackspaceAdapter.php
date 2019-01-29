@@ -12,6 +12,7 @@ class RackspaceAdapter implements AdapterInterface
     use CommonTrait;
 
     protected $options;
+    protected $prefix;
     private $client;
     private $uri;
 
@@ -21,6 +22,7 @@ class RackspaceAdapter implements AdapterInterface
     public function createAdapter($options)
     {
         $this->options = $options;
+        $this->prefix = $this->setPrefix();
         $this->createClient();
 
         return new RSAdapter($this->client);
@@ -44,20 +46,20 @@ class RackspaceAdapter implements AdapterInterface
      */
     private function createClient()
     {
-        $this->optionExists('rackspace_identity_endpoint');
-        $this->optionExists('rackspace_username');
-        $this->optionExists('rackspace_password');
-        $this->optionExists('rackspace_region');
-        $this->optionExists('rackspace_container');
+        $this->optionExists('identity_endpoint');
+        $this->optionExists('username');
+        $this->optionExists('password');
+        $this->optionExists('region');
+        $this->optionExists('container');
 
         try {
-            $method = $this->options['rackspace_identity_endpoint'];
+            $method = $this->getSetting('identity_endpoint');
             $client = new OpenStack(constant('OpenCloud\Rackspace::'.$method), [
-                'username' => $this->options['rackspace_username'],
-                'password' => $this->options['rackspace_password'],
+                'username' => $this->getSetting('username'),
+                'password' => $this->getSetting('password'),
             ]);
-            $store = $client->objectStoreService('cloudFiles', $this->options['rackspace_region'], 'publicURL');
-            $this->client = $store->getContainer($this->options['rackspace_container']);
+            $store = $client->objectStoreService('cloudFiles', $this->getSetting('region'), 'publicURL');
+            $this->client = $store->getContainer($this->getSetting('container'));
             $this->uri = $this->client->getCdn()->getCdnUri();
         } catch (\OpenCloud\Common\Exceptions\CdnNotAvailableError $e) {
             echo 'Rackspace Error: '.$e->getMessage()."\n";

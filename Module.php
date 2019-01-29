@@ -65,11 +65,11 @@ class Module extends AbstractModule
 
     public function getConfigForm(PhpRenderer $renderer)
     {
-        $services        = $this->getServiceLocator();
-        $config          = $services->get('Config');
-        $settings        = $services->get('Omeka\Settings');
-        $form            = $services->get('FormElementManager')->get(ConfigForm::class);
-        $data            = [];
+        $services = $this->getServiceLocator();
+        $config = $services->get('Config');
+        $settings = $services->get('Omeka\Settings');
+        $form = $services->get('FormElementManager')->get(ConfigForm::class);
+        $data = [];
         $defaultSettings = $config[strtolower(__NAMESPACE__)]['config'];
         foreach ($defaultSettings as $name => $value) {
             $data[$name] = $settings->get($name, $value);
@@ -86,9 +86,9 @@ class Module extends AbstractModule
     public function handleConfigForm(AbstractController $controller)
     {
         $serviceLocator = $this->getServiceLocator();
-        $settings       = $serviceLocator->get('Omeka\Settings');
-        $form           = $serviceLocator->get('FormElementManager')->get(ConfigForm::class);
-        $params         = $controller->getRequest()->getPost();
+        $settings = $serviceLocator->get('Omeka\Settings');
+        $form = $serviceLocator->get('FormElementManager')->get(ConfigForm::class);
+        $params = $controller->getRequest()->getPost();
         $form->init();
         $form->setData($params);
         if (!$form->isValid()) {
@@ -96,9 +96,9 @@ class Module extends AbstractModule
 
             return false;
         }
-        $params          = $form->getData();
+        $params = $form->getData();
         $defaultSettings = $this->getDefaultSettings();
-        $params          = array_intersect_key($params, $defaultSettings);
+        $params = array_intersect_key($params, $defaultSettings);
         foreach ($params as $name => $value) {
             $settings->set($name, $value);
         }
@@ -132,8 +132,8 @@ class Module extends AbstractModule
     private function setFileStoreAlias()
     {
         $serviceLocator = $this->getServiceLocator();
-        $settings       = $serviceLocator->get('Omeka\Settings');
-        $this->adapter  = $settings->get('anycloud_adapter');
+        $settings = $serviceLocator->get('Omeka\Settings');
+        $this->adapter = $settings->get('anycloud_adapter');
         if (isset($this->adapter) && $this->adapter !== 'default') {
             $serviceLocator->setAlias('Omeka\File\Store', File\Store\AnyCloud::class);
         }
@@ -143,7 +143,7 @@ class Module extends AbstractModule
     {
         $serviceLocator = $this->getServiceLocator();
         // TODO Fix so that configs are actually grabbed and the module can be deleted if desired
-        $config         = $serviceLocator->get('Config');
+        $config = $serviceLocator->get('Config');
 
         return $config[strtolower(__NAMESPACE__)][$key];
     }

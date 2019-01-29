@@ -12,6 +12,7 @@ class DropboxAdapter implements AdapterInterface
     use CommonTrait;
 
     protected $options;
+    protected $prefix;
     private $client;
     private $uri;
 
@@ -21,6 +22,7 @@ class DropboxAdapter implements AdapterInterface
     public function createAdapter($options)
     {
         $this->options = $options;
+        $this->prefix = $this->setPrefix();
         $this->createClient();
 
         return new FlyDropboxAdapter($this->client);
@@ -31,10 +33,10 @@ class DropboxAdapter implements AdapterInterface
      */
     private function createClient()
     {
-        $this->optionExists('dropbox_access_token');
+        $this->optionExists('access_token');
 
         try {
-            $this->client = new Client($this->options['dropbox_access_token']);
+            $this->client = new Client($this->getSetting('access_token'));
         } catch (ConfigException $e) {
             echo 'Dropbox Error: '.$e->getMessage()."\n";
         }

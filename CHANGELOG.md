@@ -5,19 +5,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [v0.2.0]
 ### Removed
 - Removed the need for users to manually change the file store alias in `config/local.config.php`
 
 ### Changed
 - Upped version number to `v0.2.0`
 - Updated `README.md`
-- Allow settings to be configurable by the user
+- Allow settings to be configurable by the user from the Admin side of the system
 - Changed the names of variables used to set up adapters (breaking change)
 - Moved reused adapter code to a trait (`src/Service/File/Adapter/Common.php`)
 - Updated `.gitignore` file to ignore `CHANGELOG.md` when exporting project
 
 ### Added
 - Added `CHANGELOG.md`
+- Added `CODE_OF_CONDUCT.md`
+- Added templates for filing issues and requesting features
 
 ## [v0.1.0] - 2019-01-27
 ### Added

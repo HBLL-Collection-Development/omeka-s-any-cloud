@@ -42,26 +42,26 @@ class AnyCloudFactory implements FactoryInterface
             case 'aws':
             case 'digital_ocean':
             case 'scaleway_object_storage':
-                $aws           = new Adapter\AwsAdapter;
+                $aws = new Adapter\AwsAdapter;
                 $this->adapter = $aws->createAdapter($this->options);
                 break;
             case 'azure':
-                $azure         = new Adapter\AzureAdapter;
-                $this->adapter = $azure->createAdapter($options);
+                $azure = new Adapter\AzureAdapter;
+                $this->adapter = $azure->createAdapter($this->options);
                 $this->tempUri = $azure->getUri();
                 break;
             case 'rackspace':
-                $rackspace     = new Adapter\RackspaceAdapter;
-                $this->adapter = $rackspace->createAdapter($options);
+                $rackspace = new Adapter\RackspaceAdapter;
+                $this->adapter = $rackspace->createAdapter($this->options);
                 $this->tempUri = $rackspace->getUri();
                 break;
             case 'dropbox':
-                $dropbox       = new Adapter\DropboxAdapter;
-                $this->adapter = $dropbox->createAdapter($options);
+                $dropbox = new Adapter\DropboxAdapter;
+                $this->adapter = $dropbox->createAdapter($this->options);
                 break;
             case 'google':
-                $google        = new Adapter\GoogleAdapter;
-                $this->adapter = $google->createAdapter($options);
+                $google = new Adapter\GoogleAdapter;
+                $this->adapter = $google->createAdapter($this->options);
                 $this->tempUri = $google->getUri();
                 break;
             default:

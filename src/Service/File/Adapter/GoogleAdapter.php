@@ -12,6 +12,7 @@ class GoogleAdapter implements AdapterInterface
     use CommonTrait;
 
     protected $options;
+    protected $prefix;
     private $client;
 
     /**
@@ -20,8 +21,9 @@ class GoogleAdapter implements AdapterInterface
     public function createAdapter($options)
     {
         $this->options = $options;
+        $this->prefix = $this->setPrefix();
         $this->createClient();
-        $bucket = $this->client->bucket($this->options['google_bucket_name']);
+        $bucket = $this->client->bucket($this->getSetting('bucket_name'));
 
         return new GoogleStorageAdapter($this->client, $bucket);
     }
@@ -33,7 +35,7 @@ class GoogleAdapter implements AdapterInterface
      */
     public function getUri()
     {
-        return $this->options['google_storage_uri'].'/'.$this->options['google_bucket_name'];
+        return $this->getSetting('storage_uri').'/'.$this->getSetting('bucket_name');
     }
 
     /**
@@ -41,14 +43,14 @@ class GoogleAdapter implements AdapterInterface
      */
     private function createClient()
     {
-        $this->optionExists('google_project_id');
-        $this->optionExists('google_bucket_name');
-        $this->optionExists('google_credentials_path');
-        $this->optionExists('google_storage_uri');
-        $path = realpath("").'/modules/AnyCloud'.$this->options['google_credentials_path'];
+        $this->optionExists('project_id');
+        $this->optionExists('bucket_name');
+        $this->optionExists('credentials_path');
+        $this->optionExists('storage_uri');
+        $path = realpath("").'/modules/AnyCloud'.$this->getSetting('credentials_path');
         try {
             $this->client = new StorageClient([
-                'projectId' => $this->options['google_project_id'],
+                'projectId' => $this->getSetting('project_id'),
                 'keyFilePath' => $path,
             ]);
         } catch (ConfigException $e) {

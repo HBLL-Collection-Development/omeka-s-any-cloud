@@ -12,6 +12,7 @@ class AzureAdapter implements AdapterInterface
     use CommonTrait;
 
     protected $options;
+    protected $prefix;
     private $client;
 
     /**
@@ -20,9 +21,10 @@ class AzureAdapter implements AdapterInterface
     public function createAdapter($options)
     {
         $this->options = $options;
+        $this->prefix = $this->setPrefix();
         $this->createClient();
 
-        return new AzureBlobStorageAdapter($this->client, $options['azure_container_name']);
+        return new AzureBlobStorageAdapter($this->client, $this->getSetting('container_name'));
     }
 
     /**
@@ -35,7 +37,8 @@ class AzureAdapter implements AdapterInterface
         if (empty($this->Uri)) {
             $this->createClient();
         }
-        return empty($options['azure_endpoint']) ? 'https://'.$options['azure_account_name'].'.blob.core.windows.net/'.$options['azure_container_name'] : $options['azure_endpoint'];
+
+        return empty($this->getSetting('endpoint')) ? 'https://'.$this->getSetting('account_name').'.blob.core.windows.net/'.$this->getSetting('container_name') : $this->getSetting('endpoint');
     }
 
     /**
@@ -43,12 +46,12 @@ class AzureAdapter implements AdapterInterface
      */
     private function createClient()
     {
-        $this->optionExists('azure_account_name');
-        $this->optionExists('azure_account_key');
-        $this->optionExists('azure_container_name');
+        $this->optionExists('account_name');
+        $this->optionExists('account_key');
+        $this->optionExists('container_name');
 
         try {
-            $this->client = BlobRestProxy::createBlobService('DefaultEndpointsProtocol=https;AccountName='.$this->options['azure_account_name'].';AccountKey='.$this->options['azure_account_key'].';');
+            $this->client = BlobRestProxy::createBlobService('DefaultEndpointsProtocol=https;AccountName='.$this->getSetting('account_name').';AccountKey='.$this->getSetting('account_key').';');
         } catch (ConfigException $e) {
             echo 'Azure Error: '.$e->getMessage()."\n";
         }

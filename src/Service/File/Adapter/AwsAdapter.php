@@ -12,7 +12,7 @@ class AwsAdapter implements AdapterInterface
     use CommonTrait;
 
     protected $options;
-    private $prefix;
+    protected $prefix;
     private $client;
 
     /**
@@ -21,30 +21,31 @@ class AwsAdapter implements AdapterInterface
     public function createAdapter($options)
     {
         $this->options = $options;
-        $this->prefix = $this->getSetting('adapter').'_';
+        $this->prefix = $this->setPrefix();
         $this->createClient();
-        return new AwsS3Adapter($this->client, $this->getSetting($this->prefix.'bucket'));
+
+        return new AwsS3Adapter($this->client, $this->getSetting('bucket'));
     }
 
     private function createClient()
     {
-        $this->optionExists($this->prefix.'key');
-        $this->optionExists($this->prefix.'secret_key');
-        $this->optionExists($this->prefix.'bucket');
-        $this->optionExists($this->prefix.'region');
-        $version = empty($this->getSetting($this->prefix.'version')) ? 'latest' : $this->getSetting($this->prefix.'version');
+        $this->optionExists('key');
+        $this->optionExists('secret_key');
+        $this->optionExists('bucket');
+        $this->optionExists('region');
+        $version = empty($this->getSetting('version')) ? 'latest' : $this->getSetting('version');
 
         try {
             $clientArray = [
                 'credentials' => [
-                    'key' => $this->getSetting($this->prefix.'key'),
-                    'secret' => $this->getSetting($this->prefix.'secret_key'),
+                    'key' => $this->getSetting('key'),
+                    'secret' => $this->getSetting('secret_key'),
                 ],
-                'region' => $this->getSetting($this->prefix.'region'),
+                'region' => $this->getSetting('region'),
                 'version' => $version,
             ];
-            $endpoint = $this->optionExists($this->prefix.'endpoint', true);
-            $clientArray['endpoint'] = ($endpoint && !empty($this->getSetting($this->prefix.'endpoint')) && $this->getSetting($this->prefix.'endpoint') !== '') ? $this->getSetting($this->prefix.'endpoint') : null;
+            $endpoint = $this->optionExists('endpoint', true);
+            $clientArray['endpoint'] = ($endpoint && !empty($this->getSetting('endpoint')) && $this->getSetting('endpoint') !== '') ? $this->getSetting('endpoint') : null;
             $this->client = new S3Client($clientArray);
         } catch (AwsException $e) {
             echo 'AWS Error: '.$e->getMessage()."\n";
