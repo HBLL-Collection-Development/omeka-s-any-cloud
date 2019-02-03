@@ -22,6 +22,7 @@ class Module extends AbstractModule
     public function onBootstrap(MvcEvent $event)
     {
         parent::onBootstrap($event);
+
         $this->setFileStoreAlias();
         require __DIR__.'/vendor/autoload.php'; // Add autoloader for module-specific requirements
     }
@@ -113,14 +114,15 @@ class Module extends AbstractModule
      */
     protected function manageSettings($settings, $process, $key = 'config')
     {
-        $defaultSettings = $this->getDefaultSettings($key);
+        $config = require __DIR__ . '/config/module.config.php';
+        $defaultSettings = $config[strtolower(__NAMESPACE__)][$key];
         foreach ($defaultSettings as $name => $value) {
             switch ($process) {
                 case 'install':
-                    $settings->set(strtolower(__NAMESPACE__).'_'.$name, $value);
+                    $settings->set($name, $value);
                     break;
                 case 'uninstall':
-                    $settings->delete(strtolower(__NAMESPACE__).'_'.$name);
+                    $settings->delete($name);
                     break;
             }
         }

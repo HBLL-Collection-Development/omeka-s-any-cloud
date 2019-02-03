@@ -12,7 +12,6 @@ class RackspaceAdapter implements AdapterInterface
     use CommonTrait;
 
     protected $options;
-    protected $prefix;
     private $client;
     private $uri;
 
@@ -22,7 +21,6 @@ class RackspaceAdapter implements AdapterInterface
     public function createAdapter($options)
     {
         $this->options = $options;
-        $this->prefix = $this->setPrefix();
         $this->createClient();
 
         return new RSAdapter($this->client);

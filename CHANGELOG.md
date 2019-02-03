@@ -6,7 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
+
+
+## [v0.3.0] - 2019-02-03
+### Changed
 - Upped version number to `v0.3.0`
+- Updated `README.md`
+- Simplified settings for fewer database entries in `setting` table (breaking change—should be last breaking change for a while)
+
+### Added
+- User friendly configuration form for multiple cloud adapters
 
 ## [v0.2.0] - 2019-01-29
 ### Removed

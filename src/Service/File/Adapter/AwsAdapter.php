@@ -12,7 +12,6 @@ class AwsAdapter implements AdapterInterface
     use CommonTrait;
 
     protected $options;
-    protected $prefix;
     private $client;
 
     /**
@@ -21,7 +20,6 @@ class AwsAdapter implements AdapterInterface
     public function createAdapter($options)
     {
         $this->options = $options;
-        $this->prefix = $this->setPrefix();
         $this->createClient();
 
         return new AwsS3Adapter($this->client, $this->getSetting('bucket'));
@@ -45,7 +43,9 @@ class AwsAdapter implements AdapterInterface
                 'version' => $version,
             ];
             $endpoint = $this->optionExists('endpoint', true);
-            $clientArray['endpoint'] = ($endpoint && !empty($this->getSetting('endpoint')) && $this->getSetting('endpoint') !== '') ? $this->getSetting('endpoint') : null;
+            if ($endpoint && !empty($this->getSetting('endpoint')) && $this->getSetting('endpoint') !== '') {
+                $clientArray['endpoint'] = $this->getSetting('endpoint');
+            }
             $this->client = new S3Client($clientArray);
         } catch (AwsException $e) {
             echo 'AWS Error: '.$e->getMessage()."\n";

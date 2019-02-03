@@ -7,7 +7,6 @@ use Omeka\File\Exception\ConfigException;
 trait CommonTrait
 {
     protected $options;
-    protected $prefix;
 
     /**
      * {@inheritDoc}
@@ -15,6 +14,7 @@ trait CommonTrait
     public function optionExists($option, $allowNull = false)
     {
         $option = $this->getSetting($option);
+
         if ((isset($option) && !empty($option)) || $allowNull === true) {
             return true;
         } else {
@@ -22,13 +22,20 @@ trait CommonTrait
         }
     }
 
-    public function setPrefix()
+    public function getAdapter()
     {
-        return $this->getSetting('adapter').'_';
+        $array = $this->options->get(['anycloud_adapter'][0]);
+        return $array['adapter'];
     }
 
     public function getSetting($name)
     {
-        return $this->options->get('anycloud_'.$this->prefix.$name);
+        $options = $this->options->get(['anycloud_'.$this->getAdapter()][0]);
+
+        if (isset($options[$this->getAdapter().'_'.$name])) {
+            return $options[$this->getAdapter().'_'.$name];
+        } else {
+            return null;
+        }
     }
 }

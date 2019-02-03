@@ -12,7 +12,6 @@ class DropboxAdapter implements AdapterInterface
     use CommonTrait;
 
     protected $options;
-    protected $prefix;
     private $client;
     private $uri;
 
@@ -22,7 +21,6 @@ class DropboxAdapter implements AdapterInterface
     public function createAdapter($options)
     {
         $this->options = $options;
-        $this->prefix = $this->setPrefix();
         $this->createClient();
 
         return new FlyDropboxAdapter($this->client);

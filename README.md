@@ -3,9 +3,9 @@ This module allows you to store your Omeka S files on one of the following exter
 * [Amazon S3 Storage](https://aws.amazon.com/s3/)
 * [Microsoft Azure Storage](https://azure.microsoft.com/en-us/services/storage/)
 * [Google Cloud Storage](https://cloud.google.com/storage/)
-* [Rackspace Files](https://www.rackspace.com/cloud/files)
 * [DigitalOcean Spaces](https://www.digitalocean.com/products/spaces/) (uses the Amazon S3 Storage adapter)
 * [Scaleway Object Storage](https://www.scaleway.com/object-storage/) (uses the Amazon S3 Storage adapter)
+* [Rackspace Files](https://www.rackspace.com/cloud/files)
 * [Dropbox](https://www.dropbox.com)
 
 It uses a filesystem abstraction system called [Flysystem](http://flysystem.thephpleague.com/docs/). You can build your own adapters to use with the system if there is a cloud storage system you would like to use but is not currently available via this module.
@@ -14,7 +14,7 @@ It is recommended that once you pick an external storage service you continue us
 
 # Installation and Configuration
 1. Install the plugin by [downloading and unzipping the latest module](https://github.com/HBLL-Collection-Development/omeka-s-any-cloud/releases) and loading it into the `modules` directory of your Omeka S instance.
-2. Enable the plugin from the Admin side of your installation under "Modules".
+2. Enable the plugin from the Admin side of your installation under “Modules”.
 3. Configure the module from the Admin side to include credentials for the cloud storage system you would like to use:
 
 After that, when you upload media for an item, it will upload to your selected cloud service rather than to your server's local storage.
@@ -37,8 +37,11 @@ See online issues on the [module issues](https://github.com/HBLL-Collection-Deve
 # TODO
 1. - [X] Remove need for users to manually change the alias in `config/local.config.php` (v0.2.0)
 2. - [X] Move all config data to a form so users can use the admin module system to enter their credentials without the need to access server files (v0.2.0)
+3. - [X] Make config forms prettier and easier to use (v0.3.0)
 3. - [ ] Provide more detailed instructions on setting up each cloud storage system (possibly using the GitHub wiki)
 
 # Possible Enhancements
 1. - [ ] Add more cloud adapters (OneDrive, Box.com)
 2. - [ ] Allow migration between different cloud platforms
+3. - [ ] Support [Archive Repertory](Archive Repertory)
+4. - [ ] Support module translation

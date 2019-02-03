@@ -12,7 +12,6 @@ class AzureAdapter implements AdapterInterface
     use CommonTrait;
 
     protected $options;
-    protected $prefix;
     private $client;
 
     /**
@@ -21,7 +20,6 @@ class AzureAdapter implements AdapterInterface
     public function createAdapter($options)
     {
         $this->options = $options;
-        $this->prefix = $this->setPrefix();
         $this->createClient();
 
         return new AzureBlobStorageAdapter($this->client, $this->getSetting('container_name'));

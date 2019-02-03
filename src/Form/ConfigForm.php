@@ -1,11 +1,15 @@
 <?php
+
 namespace AnyCloud\Form;
 
-use Zend\Form\Element;
 use Zend\Form\Form;
+use Zend\Form\Element;
+use Zend\Form\Fieldset;
 
 class ConfigForm extends Form
 {
+    protected $settings;
+
     public function setSettings($settings)
     {
         $this->settings = $settings;
@@ -13,10 +17,33 @@ class ConfigForm extends Form
 
     public function init()
     {
+        // CSRF
+        ///////
+        $this->add([
+            'type' => Element\Csrf::class,
+            'name' => 'csrf',
+            'options' => [
+                'csrf_options' => [
+                    'timeout' => 600,
+                ],
+            ],
+        ]);
+
         // ADAPTER
         //////////
         $this->add([
             'name' => 'anycloud_adapter',
+            'type' => Fieldset::class,
+            'options' => [
+                'label' => 'Any Cloud Adapter',
+            ],
+            'attributes' => [
+                'id' => 'adapter-fieldset',
+            ],
+        ]);
+        $adapterFieldset = $this->get('anycloud_adapter');
+        $adapterFieldset->add([
+            'name' => 'adapter',
             'type' => Element\Select::class,
             'options' => [
                 'label' => 'Cloud Service Adapter: ',
@@ -26,139 +53,172 @@ class ConfigForm extends Form
                     'azure' => 'Microsoft Azure Storage',
                     'google' => 'Google Cloud Storage',
                     'digital_ocean' => 'DigitalOcean Spaces',
-                    'scaleway_object_storage' => 'Scaleway Object Storage',
+                    'scaleway' => 'Scaleway Object Storage',
                     'rackspace' => 'Rackspace Files',
                     'dropbox' => 'Dropbox',
                 ],
             ],
             'attributes' => [
-                'id' => 'anycloud_adapter',
+                'id' => 'adapter',
             ],
         ]);
 
         // AMAZON S3
         ////////////
         $this->add([
-            'name' => 'anycloud_aws_key',
+            'name' => 'anycloud_aws',
+            'type' => Fieldset::class,
+            'options' => [
+                'label' => 'AmazonS3 Storage',
+            ],
+            'attributes' => [
+                'class' => 'aws fieldset',
+            ],
+        ]);
+        $awsFieldset = $this->get('anycloud_aws');
+        $awsFieldset->add([
+            'name' => 'aws_key',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'AWS Key',
             ],
             'attributes' => [
-                'id' => 'anycloud_aws_key',
+                'id' => 'aws_key',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_aws_secret_key',
+        $awsFieldset->add([
+            'name' => 'aws_secret_key',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'AWS Secret Key',
             ],
             'attributes' => [
-                'id' => 'anycloud_aws_secret_key',
+                'id' => 'aws_secret_key',
                 'cols' => '100',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_aws_bucket',
+        $awsFieldset->add([
+            'name' => 'aws_bucket',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'AWS Bucket',
             ],
             'attributes' => [
-                'id' => 'anycloud_aws_bucket',
+                'id' => 'aws_bucket',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_aws_region',
+        $awsFieldset->add([
+            'name' => 'aws_region',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'AWS Region',
             ],
             'attributes' => [
-                'id' => 'anycloud_aws_region',
+                'id' => 'aws_region',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_aws_endpoint',
+        $awsFieldset->add([
+            'name' => 'aws_endpoint',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'AWS Endpoint',
                 'info' => 'Can usually leave blank unless you have a custom endpoint set up. See https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region',
             ],
             'attributes' => [
-                'id' => 'anycloud_aws_endpoint',
+                'id' => 'aws_endpoint',
             ],
         ]);
 
-        // MICROSOFT AZURE
-        //////////////////
+        // AZURE
+        ////////
         $this->add([
-            'name' => 'anycloud_azure_account_name',
+            'name' => 'anycloud_azure',
+            'type' => Fieldset::class,
+            'options' => [
+                'label' => 'Microsoft Azure Storage',
+            ],
+            'attributes' => [
+                'class' => 'azure fieldset',
+            ],
+        ]);
+        $azureFieldset = $this->get('anycloud_azure');
+        $azureFieldset->add([
+            'name' => 'azure_account_name',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Azure Account Name',
             ],
             'attributes' => [
-                'id' => 'anycloud_azure_account_name',
+                'id' => 'azure_account_name',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_azure_account_key',
+        $azureFieldset->add([
+            'name' => 'azure_account_key',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Azure Account Key',
             ],
             'attributes' => [
-                'id' => 'anycloud_azure_account_key',
+                'id' => 'azure_account_key',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_azure_container_name',
+        $azureFieldset->add([
+            'name' => 'azure_container_name',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Azure Container Name',
             ],
             'attributes' => [
-                'id' => 'anycloud_azure_container_name',
+                'id' => 'azure_container_name',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_azure_endpoint',
+        $azureFieldset->add([
+            'name' => 'azure_endpoint',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Azure Endpoint',
                 'info' => 'Can usually leave blank unless you have a custom endpoint set up',
             ],
             'attributes' => [
-                'id' => 'anycloud_azure_endpoint',
+                'id' => 'azure_endpoint',
             ],
         ]);
 
         // GOOGLE CLOUD
         ///////////////
         $this->add([
-            'name' => 'anycloud_google_project_id',
+            'name' => 'anycloud_google',
+            'type' => Fieldset::class,
+            'options' => [
+                'label' => 'Google Cloud Storage',
+            ],
+            'attributes' => [
+                'class' => 'google fieldset',
+            ],
+        ]);
+        $googleFieldset = $this->get('anycloud_google');
+        $googleFieldset->add([
+            'name' => 'google_project_id',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Google Project ID',
             ],
             'attributes' => [
-                'id' => 'anycloud_google_project_id',
+                'id' => 'google_project_id',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_google_bucket_name',
+        $googleFieldset->add([
+            'name' => 'google_bucket_name',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Google Bucket Name',
             ],
             'attributes' => [
-                'id' => 'anycloud_google_bucket_name',
+                'id' => 'google_bucket_name',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_google_credentials_path',
+        $googleFieldset->add([
+            'name' => 'google_credentials_path',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Google Credentials Path',
@@ -166,11 +226,11 @@ class ConfigForm extends Form
                 'value' => '/src/Service/File/Adapter/Google/{CONFIG}.json',
             ],
             'attributes' => [
-                'id' => 'anycloud_google_credentials_path',
+                'id' => 'google_credentials_path',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_google_storage_uri',
+        $googleFieldset->add([
+            'name' => 'google_storage_uri',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Google Storage URI',
@@ -178,214 +238,226 @@ class ConfigForm extends Form
                 'value' => 'https://storage.googleapis.com',
             ],
             'attributes' => [
-                'id' => 'anycloud_google_storage_uri',
+                'id' => 'google_storage_uri',
             ],
         ]);
 
         // DIGITALOCEAN SPACES
         //////////////////////
         $this->add([
-            'name' => 'anycloud_digital_ocean_key',
+            'name' => 'anycloud_digital_ocean',
+            'type' => Fieldset::class,
+            'options' => [
+                'label' => 'DigitalOcean Spaces',
+            ],
+            'attributes' => [
+                'class' => 'digital_ocean fieldset',
+            ],
+        ]);
+        $digitaloceanFieldset = $this->get('anycloud_digital_ocean');
+        $digitaloceanFieldset->add([
+            'name' => 'digital_ocean_key',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'DigitalOcean AWS Key',
             ],
             'attributes' => [
-                'id' => 'anycloud_digital_ocean_key',
+                'id' => 'digital_ocean_key',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_digital_ocean_secret_key',
+        $digitaloceanFieldset->add([
+            'name' => 'digital_ocean_secret_key',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'DigitalOcean AWS Secret Key',
             ],
             'attributes' => [
-                'id' => 'anycloud_digital_ocean_secret_key',
+                'id' => 'digital_ocean_secret_key',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_digital_ocean_bucket',
+        $digitaloceanFieldset->add([
+            'name' => 'digital_ocean_bucket',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'DigitalOcean AWS Bucket',
             ],
             'attributes' => [
-                'id' => 'anycloud_digital_ocean_bucket',
+                'id' => 'digital_ocean_bucket',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_digital_ocean_region',
+        $digitaloceanFieldset->add([
+            'name' => 'digital_ocean_region',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'DigitalOcean AWS Region',
             ],
             'attributes' => [
-                'id' => 'anycloud_digital_ocean_region',
+                'id' => 'digital_ocean_region',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_digital_ocean_endpoint',
+        $digitaloceanFieldset->add([
+            'name' => 'digital_ocean_endpoint',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'DigitalOcean AWS Endpoint',
             ],
             'attributes' => [
-                'id' => 'anycloud_digital_ocean_endpoint',
+                'id' => 'digital_ocean_endpoint',
             ],
         ]);
 
         // SCALEWAY OBJECT STORAGE
         //////////////////////////
         $this->add([
-            'name' => 'anycloud_scaleway_object_storage_key',
-            'type' => Element\Text::class,
+            'name' => 'anycloud_scaleway',
+            'type' => Fieldset::class,
             'options' => [
-                'label' => 'Scaleway Object Storage AWS Key',
+                'label' => 'Scaleway Object Storage',
             ],
             'attributes' => [
-                'id' => 'anycloud_scaleway_object_storage_key',
+                'class' => 'scaleway fieldset',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_scaleway_object_storage_secret_key',
+        $scalewayFieldset = $this->get('anycloud_scaleway');
+        $scalewayFieldset->add([
+            'name' => 'scaleway_key',
             'type' => Element\Text::class,
             'options' => [
-                'label' => 'Scaleway Object Storage AWS Secret Key',
+                'label' => 'Scaleway AWS Key',
             ],
             'attributes' => [
-                'id' => 'anycloud_scaleway_object_storage_secret_key',
+                'id' => 'scaleway_key',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_scaleway_object_storage_bucket',
+        $scalewayFieldset->add([
+            'name' => 'scaleway_secret_key',
             'type' => Element\Text::class,
             'options' => [
-                'label' => 'Scaleway Object Storage AWS Bucket',
+                'label' => 'Scaleway AWS Secret Key',
             ],
             'attributes' => [
-                'id' => 'anycloud_scaleway_object_storage_bucket',
+                'id' => 'scaleway_secret_key',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_scaleway_object_storage_region',
+        $scalewayFieldset->add([
+            'name' => 'scaleway_bucket',
             'type' => Element\Text::class,
             'options' => [
-                'label' => 'Scaleway Object Storage AWS Region',
+                'label' => 'Scaleway AWS Bucket',
             ],
             'attributes' => [
-                'id' => 'anycloud_scaleway_object_storage_region',
+                'id' => 'scaleway_bucket',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_scaleway_object_storage_endpoint',
+        $scalewayFieldset->add([
+            'name' => 'scaleway_region',
             'type' => Element\Text::class,
             'options' => [
-                'label' => 'Scaleway Object Storage AWS Endpoint',
+                'label' => 'Scaleway AWS Region',
             ],
             'attributes' => [
-                'id' => 'anycloud_scaleway_object_storage_endpoint',
+                'id' => 'scaleway_region',
+            ],
+        ]);
+        $scalewayFieldset->add([
+            'name' => 'scaleway_endpoint',
+            'type' => Element\Text::class,
+            'options' => [
+                'label' => 'Scaleway AWS Endpoint',
+            ],
+            'attributes' => [
+                'id' => 'scaleway_endpoint',
             ],
         ]);
 
-        // RACKSPACE FILE
-        /////////////////
+        // RACKSPACE FILES
+        //////////////////
         $this->add([
-            'name' => 'anycloud_rackspace_identity_endpoint',
+            'name' => 'anycloud_rackspace',
+            'type' => Fieldset::class,
+            'options' => [
+                'label' => 'Rackspace Files',
+            ],
+            'attributes' => [
+                'class' => 'rackspace fieldset',
+            ],
+        ]);
+        $rackspaceFieldset = $this->get('anycloud_rackspace');
+        $rackspaceFieldset->add([
+            'name' => 'rackspace_identity_endpoint',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Rackspace Identity Endpoint',
+                'info' => 'Valid options include “US_IDENTITY_ENDPOINT” and “UK_IDENTITY_ENDPOINT”',
             ],
             'attributes' => [
-                'id' => 'anycloud_rackspace_identity_endpoint',
+                'id' => 'rackspace_identity_endpoint',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_rackspace_username',
+        $rackspaceFieldset->add([
+            'name' => 'rackspace_username',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Rackspace Username',
             ],
             'attributes' => [
-                'id' => 'anycloud_rackspace_username',
+                'id' => 'rackspace_username',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_rackspace_password',
+        $rackspaceFieldset->add([
+            'name' => 'rackspace_password',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Rackspace Password',
             ],
             'attributes' => [
-                'id' => 'anycloud_rackspace_password',
+                'id' => 'rackspace_password',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_rackspace_container',
+        $rackspaceFieldset->add([
+            'name' => 'rackspace_container',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Rackspace Container Name',
             ],
             'attributes' => [
-                'id' => 'anycloud_rackspace_container',
+                'id' => 'rackspace_container',
             ],
         ]);
-        $this->add([
-            'name' => 'anycloud_rackspace_region',
+        $rackspaceFieldset->add([
+            'name' => 'rackspace_region',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Rackspace Region',
             ],
             'attributes' => [
-                'id' => 'anycloud_rackspace_region',
+                'id' => 'rackspace_region',
             ],
         ]);
 
         // DROPBOX
         //////////
         $this->add([
-            'name' => 'anycloud_dropbox_access_token',
+            'name' => 'anycloud_dropbox',
+            'type' => Fieldset::class,
+            'options' => [
+                'label' => 'Dropbox',
+            ],
+            'attributes' => [
+                'class' => 'dropbox fieldset',
+            ],
+        ]);
+        $dropboxFieldset = $this->get('anycloud_dropbox');
+        $dropboxFieldset->add([
+            'name' => 'dropbox_access_token',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Dropbox Access Token',
             ],
             'attributes' => [
-                'id' => 'anycloud_dropbox_access_token',
+                'id' => 'dropbox_access_token',
             ],
         ]);
-
-//        $this->add([
-//            'name' => 'amazons3_expiration',
-//            'type' => Element\Text::class,
-//            'options' => [
-//                'label' => 'Expiration (minutes)', // @translate
-//                'info' => $this->translate("If an expiration time is set and grater than zero, we're uploading private files and using signed URLs. If not, we're uploading public files."), // @translate
-//            ],
-//        ]);
-        $inputFilter = $this->getInputFilter();
-//        $inputFilter->add([
-//            'name' => 'amazons3_access_key_id',
-//            'required' => true,
-//        ]);
-//        $inputFilter->add([
-//            'name' => 'amazons3_secret_access_key',
-//            'required' => true,
-//        ]);
-//        $inputFilter->add([
-//            'name' => 'amazons3_bucket',
-//            'required' => true,
-//        ]);
-//        $inputFilter->add([
-//            'name' => 'amazons3_endpoint',
-//            'required' => false,
-//        ]);
-//        $inputFilter->add([
-//            'name' => 'amazons3_expiration',
-//            'required' => false,
-//            'filters' => [
-//                ['name' => 'Int'],
-//            ],
-//        ]);
     }
 
     protected function getSetting($name)

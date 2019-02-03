@@ -12,7 +12,6 @@ class GoogleAdapter implements AdapterInterface
     use CommonTrait;
 
     protected $options;
-    protected $prefix;
     private $client;
 
     /**
@@ -21,7 +20,6 @@ class GoogleAdapter implements AdapterInterface
     public function createAdapter($options)
     {
         $this->options = $options;
-        $this->prefix = $this->setPrefix();
         $this->createClient();
         $bucket = $this->client->bucket($this->getSetting('bucket_name'));
 
