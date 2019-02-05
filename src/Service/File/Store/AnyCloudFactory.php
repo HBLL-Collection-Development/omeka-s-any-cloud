@@ -13,12 +13,12 @@ class AnyCloudFactory implements FactoryInterface
 {
     use CommonTrait;
 
+    const AWS_BASED = ['aws', 'digital_ocean', 'scaleway'];
     protected $options;
     private $filesystem;
     private $uri;
     private $tempUri;
     private $adapter;
-    const AWS_BASED = ['aws', 'digital_ocean', 'scaleway'];
 
     /**
      * @param ContainerInterface $serviceLocator
@@ -41,15 +41,14 @@ class AnyCloudFactory implements FactoryInterface
      */
     private function createFilesystem()
     {
-        if(in_array($this->getAdapter(), self::AWS_BASED)) {
-            $adapter = new Adapter\AwsAdapter;
+        if (in_array($this->getAdapter(), self::AWS_BASED)) {
+            $adapter       = new Adapter\AwsAdapter;
             $this->adapter = $adapter->createAdapter($this->options);
         } else {
-            $adapter = new Adapter\AzureAdapter;
+            $adapter       = new Adapter\AzureAdapter;
             $this->adapter = $adapter->createAdapter($this->options);
             $this->tempUri = $adapter->getUri();
         }
-
         $this->filesystem = new Filesystem($this->adapter);
     }
 
@@ -58,7 +57,7 @@ class AnyCloudFactory implements FactoryInterface
      */
     private function createUri()
     {
-        if(in_array($this->getAdapter(), self::AWS_BASED)) {
+        if (in_array($this->getAdapter(), self::AWS_BASED)) {
             $this->uri = dirname($this->filesystem->getAdapter()->getClient()->getObjectUrl($this->getSetting('bucket'),
                 $this->getSetting('key')));
         } else {

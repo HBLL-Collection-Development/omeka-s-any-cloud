@@ -17,8 +17,24 @@ class ConfigForm extends Form
 
     public function init()
     {
-        // CSRF
-        ///////
+        $this->addCsrf();
+        $this->addAdapter();
+        $this->addAws();
+        $this->addAzure();
+        $this->addGoogle();
+        $this->addDigitalOcean();
+        $this->addScaleway();
+        $this->addRackspace();
+        $this->addDropbox();
+    }
+
+    protected function getSetting($name)
+    {
+        return $this->settings->get($name);
+    }
+
+    private function addCsrf()
+    {
         $this->add([
             'type' => Element\Csrf::class,
             'name' => 'csrf',
@@ -28,9 +44,10 @@ class ConfigForm extends Form
                 ],
             ],
         ]);
+    }
 
-        // ADAPTER
-        //////////
+    private function addAdapter()
+    {
         $this->add([
             'name' => 'anycloud_adapter',
             'type' => Fieldset::class,
@@ -62,9 +79,10 @@ class ConfigForm extends Form
                 'id' => 'adapter',
             ],
         ]);
+    }
 
-        // AMAZON S3
-        ////////////
+    private function addAws()
+    {
         $this->add([
             'name' => 'anycloud_aws',
             'type' => Fieldset::class,
@@ -128,9 +146,10 @@ class ConfigForm extends Form
                 'id' => 'aws_endpoint',
             ],
         ]);
+    }
 
-        // AZURE
-        ////////
+    private function addAzure()
+    {
         $this->add([
             'name' => 'anycloud_azure',
             'type' => Fieldset::class,
@@ -183,9 +202,10 @@ class ConfigForm extends Form
                 'id' => 'azure_endpoint',
             ],
         ]);
+    }
 
-        // GOOGLE CLOUD
-        ///////////////
+    private function addGoogle()
+    {
         $this->add([
             'name' => 'anycloud_google',
             'type' => Fieldset::class,
@@ -241,9 +261,10 @@ class ConfigForm extends Form
                 'id' => 'google_storage_uri',
             ],
         ]);
+    }
 
-        // DIGITALOCEAN SPACES
-        //////////////////////
+    private function addDigitalOcean()
+    {
         $this->add([
             'name' => 'anycloud_digital_ocean',
             'type' => Fieldset::class,
@@ -305,9 +326,10 @@ class ConfigForm extends Form
                 'id' => 'digital_ocean_endpoint',
             ],
         ]);
+    }
 
-        // SCALEWAY OBJECT STORAGE
-        //////////////////////////
+    private function addScaleway()
+    {
         $this->add([
             'name' => 'anycloud_scaleway',
             'type' => Fieldset::class,
@@ -369,9 +391,10 @@ class ConfigForm extends Form
                 'id' => 'scaleway_endpoint',
             ],
         ]);
+    }
 
-        // RACKSPACE FILES
-        //////////////////
+    private function addRackspace()
+    {
         $this->add([
             'name' => 'anycloud_rackspace',
             'type' => Fieldset::class,
@@ -434,9 +457,10 @@ class ConfigForm extends Form
                 'id' => 'rackspace_region',
             ],
         ]);
+    }
 
-        // DROPBOX
-        //////////
+    private function addDropbox()
+    {
         $this->add([
             'name' => 'anycloud_dropbox',
             'type' => Fieldset::class,
@@ -458,10 +482,5 @@ class ConfigForm extends Form
                 'id' => 'dropbox_access_token',
             ],
         ]);
-    }
-
-    protected function getSetting($name)
-    {
-        return $this->settings->get($name);
     }
 }
