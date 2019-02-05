@@ -3,9 +3,9 @@
 namespace AnyCloud\Service\File\Adapter;
 
 use AnyCloud\Traits\CommonTrait;
-use OpenCloud\OpenStack;
 use League\Flysystem\Rackspace\RackspaceAdapter as RSAdapter;
 use Omeka\File\Exception\ConfigException;
+use OpenCloud\OpenStack;
 
 class RackspaceAdapter implements AdapterInterface
 {
@@ -16,7 +16,7 @@ class RackspaceAdapter implements AdapterInterface
     private $uri;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createAdapter($options)
     {
@@ -27,7 +27,7 @@ class RackspaceAdapter implements AdapterInterface
     }
 
     /**
-     * Find the public base URL for the resource
+     * Find the public base URL for the resource.
      *
      * return string Base URL for the resource
      */
@@ -36,11 +36,12 @@ class RackspaceAdapter implements AdapterInterface
         if (empty($this->Uri)) {
             $this->createClient();
         }
+
         return $this->uri;
     }
 
     /**
-     * Create client
+     * Create client.
      */
     private function createClient()
     {

@@ -4,8 +4,8 @@ namespace AnyCloud\Service\File\Adapter;
 
 use AnyCloud\Traits\CommonTrait;
 use Google\Cloud\Storage\StorageClient;
-use Superbalist\Flysystem\GoogleStorage\GoogleStorageAdapter;
 use Omeka\File\Exception\ConfigException;
+use Superbalist\Flysystem\GoogleStorage\GoogleStorageAdapter;
 
 class GoogleAdapter implements AdapterInterface
 {
@@ -15,7 +15,7 @@ class GoogleAdapter implements AdapterInterface
     private $client;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createAdapter($options)
     {
@@ -27,7 +27,7 @@ class GoogleAdapter implements AdapterInterface
     }
 
     /**
-     * Find the public base URI for the resource
+     * Find the public base URI for the resource.
      *
      * return string Base URI for the resource
      */
@@ -37,7 +37,7 @@ class GoogleAdapter implements AdapterInterface
     }
 
     /**
-     * Create client
+     * Create client.
      */
     private function createClient()
     {
@@ -45,10 +45,11 @@ class GoogleAdapter implements AdapterInterface
         $this->optionExists('bucket_name');
         $this->optionExists('credentials_path');
         $this->optionExists('storage_uri');
-        $path = realpath("").'/modules/AnyCloud'.$this->getSetting('credentials_path');
+        $path = realpath('').'/modules/AnyCloud'.$this->getSetting('credentials_path');
+
         try {
             $this->client = new StorageClient([
-                'projectId' => $this->getSetting('project_id'),
+                'projectId'   => $this->getSetting('project_id'),
                 'keyFilePath' => $path,
             ]);
         } catch (ConfigException $e) {
