@@ -20,14 +20,15 @@ class AnyCloud implements StoreInterface
      * @param Filesystem  $remoteFilesystem Filesystem to use
      * @param array       $configs          Array containing `config` data
      * @param string|null $uri              URI structure for file
-     * @param object      $adapter          Adapter that can be used to create temporary links or call other methods of the Flysystem Adapter
+     * @param object      $adapter          Adapter that can be used to create temporary links or call other methods of
+     *                                      the Flysystem Adapter
      */
     public function __construct(Filesystem $remoteFilesystem, $configs, $uri = null, $adapter = null)
     {
         $this->remoteFilesystem = $remoteFilesystem;
-        $this->configs = $configs;
-        $this->uri = $uri;
-        $this->adapter = $adapter;
+        $this->configs          = $configs;
+        $this->uri              = $uri;
+        $this->adapter          = $adapter;
     }
 
     /**
@@ -63,7 +64,7 @@ class AnyCloud implements StoreInterface
     public function getUri($storagePath)
     {
         // Kludgy solution to working with temporary Dropbox URIs
-        if (empty($this->uri) && is_object($this->adapter)) {
+        if ($this->uri === null && is_object($this->adapter)) {
             return $this->adapter->getTemporaryLink($storagePath);
         }
         // Normal method for grabbing URIs from `AnyCloudFactory` (for everything except Dropbox)

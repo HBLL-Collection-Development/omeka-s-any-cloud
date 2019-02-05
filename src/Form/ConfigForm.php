@@ -8,16 +8,11 @@ use Zend\Form\Fieldset;
 
 class ConfigForm extends Form
 {
-    protected $settings;
-
-    public function setSettings($settings)
-    {
-        $this->settings = $settings;
-    }
-
+    /**
+     * Initialize the configuration form
+     */
     public function init()
     {
-        $this->addCsrf();
         $this->addAdapter();
         $this->addAws();
         $this->addAzure();
@@ -28,24 +23,9 @@ class ConfigForm extends Form
         $this->addDropbox();
     }
 
-    protected function getSetting($name)
-    {
-        return $this->settings->get($name);
-    }
-
-    private function addCsrf()
-    {
-        $this->add([
-            'type' => Element\Csrf::class,
-            'name' => 'csrf',
-            'options' => [
-                'csrf_options' => [
-                    'timeout' => 600,
-                ],
-            ],
-        ]);
-    }
-
+    /**
+     * Add adapter drop-down options to configuration form
+     */
     private function addAdapter()
     {
         $this->add([
@@ -81,6 +61,9 @@ class ConfigForm extends Form
         ]);
     }
 
+    /**
+     * Add Amazon S3 Storage options to configuration form
+     */
     private function addAws()
     {
         $this->add([
@@ -148,6 +131,9 @@ class ConfigForm extends Form
         ]);
     }
 
+    /**
+     * Add Microsoft Azure Storage options to configuration form
+     */
     private function addAzure()
     {
         $this->add([
@@ -204,6 +190,9 @@ class ConfigForm extends Form
         ]);
     }
 
+    /**
+     * Add Google Cloud Storage options to configuration form
+     */
     private function addGoogle()
     {
         $this->add([
@@ -263,6 +252,9 @@ class ConfigForm extends Form
         ]);
     }
 
+    /**
+     * Add DigitalOcean Spaces options to configuration form
+     */
     private function addDigitalOcean()
     {
         $this->add([
@@ -328,6 +320,9 @@ class ConfigForm extends Form
         ]);
     }
 
+    /**
+     * Add Scaleway Object Storage options to configuration form
+     */
     private function addScaleway()
     {
         $this->add([
@@ -393,6 +388,9 @@ class ConfigForm extends Form
         ]);
     }
 
+    /**
+     * Add Rackspace Files options to configuration form
+     */
     private function addRackspace()
     {
         $this->add([
@@ -459,6 +457,9 @@ class ConfigForm extends Form
         ]);
     }
 
+    /**
+     * Add Dropbox options to configuration form
+     */
     private function addDropbox()
     {
         $this->add([
