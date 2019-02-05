@@ -3,9 +3,9 @@
 namespace AnyCloud\Service\File\Adapter;
 
 use AnyCloud\Traits\CommonTrait;
+use Omeka\File\Exception\ConfigException;
 use Spatie\Dropbox\Client;
 use Spatie\FlysystemDropbox\DropboxAdapter as FlyDropboxAdapter;
-use Omeka\File\Exception\ConfigException;
 
 class DropboxAdapter implements AdapterInterface
 {
@@ -15,7 +15,7 @@ class DropboxAdapter implements AdapterInterface
     private $client;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createAdapter($options)
     {
@@ -26,7 +26,7 @@ class DropboxAdapter implements AdapterInterface
     }
 
     /**
-     * Find the public base URI for the resource
+     * Find the public base URI for the resource.
      *
      * This is actually generated on the fly in `AnyCloudFactory.php`
      * because all Dropbox URIs are temporary and expire
@@ -35,11 +35,10 @@ class DropboxAdapter implements AdapterInterface
      */
     public function getUri()
     {
-        return null;
     }
 
     /**
-     * Create client
+     * Create client.
      */
     private function createClient()
     {

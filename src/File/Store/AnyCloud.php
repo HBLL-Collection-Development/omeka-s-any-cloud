@@ -4,8 +4,8 @@ namespace AnyCloud\File\Store;
 
 use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
-use Omeka\File\Store\StoreInterface;
 use Omeka\File\Exception\ConfigException;
+use Omeka\File\Store\StoreInterface;
 
 class AnyCloud implements StoreInterface
 {
@@ -26,13 +26,13 @@ class AnyCloud implements StoreInterface
     public function __construct(Filesystem $remoteFilesystem, $configs, $uri = null, $adapter = null)
     {
         $this->remoteFilesystem = $remoteFilesystem;
-        $this->configs          = $configs;
-        $this->uri              = $uri;
-        $this->adapter          = $adapter;
+        $this->configs = $configs;
+        $this->uri = $uri;
+        $this->adapter = $adapter;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function put($source, $storagePath)
     {
@@ -47,7 +47,7 @@ class AnyCloud implements StoreInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function delete($storagePath)
     {
@@ -59,7 +59,7 @@ class AnyCloud implements StoreInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getUri($storagePath)
     {

@@ -5,8 +5,8 @@ namespace AnyCloud\Service\File\Store;
 use AnyCloud\File\Store\AnyCloud;
 use AnyCloud\Service\File\Adapter;
 use AnyCloud\Traits\CommonTrait;
-use League\Flysystem\Filesystem;
 use Interop\Container\ContainerInterface;
+use League\Flysystem\Filesystem;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 class AnyCloudFactory implements FactoryInterface
@@ -37,15 +37,15 @@ class AnyCloudFactory implements FactoryInterface
     }
 
     /**
-     * Create the Filesystem object
+     * Create the Filesystem object.
      */
     private function createFilesystem()
     {
         if (in_array($this->getAdapter(), self::AWS_BASED)) {
-            $adapter       = new Adapter\AwsAdapter;
+            $adapter = new Adapter\AwsAdapter();
             $this->adapter = $adapter->createAdapter($this->options);
         } else {
-            $adapter       = new Adapter\AzureAdapter;
+            $adapter = new Adapter\AzureAdapter();
             $this->adapter = $adapter->createAdapter($this->options);
             $this->tempUri = $adapter->getUri();
         }
@@ -53,7 +53,7 @@ class AnyCloudFactory implements FactoryInterface
     }
 
     /**
-     * Create URI for file
+     * Create URI for file.
      */
     private function createUri()
     {

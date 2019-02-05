@@ -15,7 +15,7 @@ class AzureAdapter implements AdapterInterface
     private $client;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createAdapter($options)
     {
@@ -26,7 +26,7 @@ class AzureAdapter implements AdapterInterface
     }
 
     /**
-     * Find the public base URL for the resource
+     * Find the public base URL for the resource.
      *
      * return string Base URL for the resource
      */
@@ -40,7 +40,7 @@ class AzureAdapter implements AdapterInterface
     }
 
     /**
-     * Create client
+     * Create client.
      */
     private function createClient()
     {

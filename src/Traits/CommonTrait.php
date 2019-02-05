@@ -9,7 +9,7 @@ trait CommonTrait
     protected $options;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function optionExists($option, $allowNull = false)
     {
@@ -25,6 +25,7 @@ trait CommonTrait
     public function getAdapter()
     {
         $array = $this->options->get(['anycloud_adapter'][0]);
+
         return $array['adapter'];
     }
 
@@ -35,7 +36,7 @@ trait CommonTrait
         if (isset($options[$this->getAdapter().'_'.$name])) {
             return $options[$this->getAdapter().'_'.$name];
         } else {
-            return null;
+            return;
         }
     }
 }

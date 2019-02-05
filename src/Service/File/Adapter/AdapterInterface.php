@@ -10,7 +10,7 @@ namespace AnyCloud\Service\File\Adapter;
 interface AdapterInterface
 {
     /**
-     * Create the filesystem adapter
+     * Create the filesystem adapter.
      *
      * @param array $options Array of options needed to create an adapter
      *
@@ -19,7 +19,7 @@ interface AdapterInterface
     public function createAdapter($options);
 
     /**
-     * Determine whether an option exists or not
+     * Determine whether an option exists or not.
      *
      * @param string $option    Array key value of option to check if it exists
      * @param bool   $allowNull Whether or not a `null` value is allowed for this option

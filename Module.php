@@ -5,10 +5,10 @@ namespace AnyCloud;
 use AnyCloud\Form\Configform;
 use Omeka\Module\AbstractModule;
 use Omeka\Module\Exception\ModuleCannotInstallException;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Mvc\Controller\AbstractController;
-use Zend\View\Renderer\PhpRenderer;
 use Zend\Mvc\MvcEvent;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\View\Renderer\PhpRenderer;
 
 class Module extends AbstractModule
 {
@@ -28,7 +28,7 @@ class Module extends AbstractModule
     }
 
     /**
-     * Generate user messages in case of install problems
+     * Generate user messages in case of install problems.
      *
      * @param ServiceLocatorInterface $serviceLocator
      */
@@ -42,7 +42,7 @@ class Module extends AbstractModule
     }
 
     /**
-     * Uninstall module and settings
+     * Uninstall module and settings.
      *
      * @param ServiceLocatorInterface $serviceLocator
      */
@@ -53,7 +53,7 @@ class Module extends AbstractModule
     }
 
     /**
-     * Script to run when upgrading module
+     * Script to run when upgrading module.
      *
      * @param string                  $oldVersion
      * @param string                  $newVersion
@@ -106,7 +106,7 @@ class Module extends AbstractModule
     }
 
     /**
-     * Manage module settings
+     * Manage module settings.
      *
      * @param ServiceLocatorInterface $settings Object containing Omeka settings
      * @param string                  $process  Process used to manage setting (`install` or `uninstall`)
@@ -114,7 +114,7 @@ class Module extends AbstractModule
      */
     protected function manageSettings($settings, $process, $key = 'config')
     {
-        $config = require __DIR__ . '/config/module.config.php';
+        $config = require __DIR__.'/config/module.config.php';
         $defaultSettings = $config[strtolower(__NAMESPACE__)][$key];
         foreach ($defaultSettings as $name => $value) {
             switch ($process) {
@@ -129,7 +129,7 @@ class Module extends AbstractModule
     }
 
     /**
-     * Override default file store alias to use Any Cloud module for uploads instead
+     * Override default file store alias to use Any Cloud module for uploads instead.
      */
     private function setFileStoreAlias()
     {

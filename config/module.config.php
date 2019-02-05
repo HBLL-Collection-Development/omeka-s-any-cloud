@@ -5,7 +5,7 @@ namespace AnyCloud;
 return [
     'view_manager' => [
         'template_path_stack' => [
-            dirname(__DIR__) . '/view',
+            dirname(__DIR__).'/view',
         ],
     ],
     'form_elements' => [
@@ -20,16 +20,16 @@ return [
     ],
     'anycloud' => [
         'config' => [
-            'anycloud_adapter' => ['adapter' => 'default'],
-            'anycloud_aws' => [],
+            'anycloud_adapter'       => ['adapter' => 'default'],
+            'anycloud_aws'           => [],
             'anycloud_digital_ocean' => [],
-            'anycloud_scaleway' => [],
-            'anycloud_azure' => [],
-            'anycloud_rackspace' => [],
-            'anycloud_dropbox' => [],
-            'anycloud_google' => [
+            'anycloud_scaleway'      => [],
+            'anycloud_azure'         => [],
+            'anycloud_rackspace'     => [],
+            'anycloud_dropbox'       => [],
+            'anycloud_google'        => [
                 'google_credentials_path' => '/src/Service/File/Adapter/Google/{CONFIG}.json',
-                'google_storage_uri' => 'https://storage.googleapis.com',
+                'google_storage_uri'      => 'https://storage.googleapis.com',
             ],
         ],
     ],

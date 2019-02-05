@@ -3,8 +3,8 @@
 namespace AnyCloud\Service\File\Adapter;
 
 use AnyCloud\Traits\CommonTrait;
-use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
+use Aws\S3\S3Client;
 use League\Flysystem\AwsS3v3\AwsS3Adapter;
 
 class AwsAdapter implements AdapterInterface
@@ -15,7 +15,7 @@ class AwsAdapter implements AdapterInterface
     private $client;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createAdapter($options)
     {
@@ -36,10 +36,10 @@ class AwsAdapter implements AdapterInterface
         try {
             $clientArray = [
                 'credentials' => [
-                    'key' => $this->getSetting('key'),
+                    'key'    => $this->getSetting('key'),
                     'secret' => $this->getSetting('secret_key'),
                 ],
-                'region' => $this->getSetting('region'),
+                'region'  => $this->getSetting('region'),
                 'version' => $version,
             ];
             $endpoint = $this->optionExists('endpoint', true);
