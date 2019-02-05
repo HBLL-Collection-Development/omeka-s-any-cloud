@@ -18,7 +18,6 @@ It uses a filesystem abstraction system called [Flysystem](http://flysystem.thep
 It is recommended that once you pick an external storage service you continue using it as migrating to a different external file system is not currently supported.
 
 ## Installation and Configuration
-
 1. Install the plugin by [downloading and unzipping the latest module](https://github.com/HBLL-Collection-Development/omeka-s-any-cloud/releases) and loading it into the `modules` directory of your Omeka S instance.
 2. Enable the plugin from the Admin side of your installation under “Modules”.
 3. Configure the module from the Admin side to include credentials for the cloud storage system you would like to use:
@@ -26,7 +25,6 @@ It is recommended that once you pick an external storage service you continue us
 After that, when you upload media for an item, it will upload to your selected cloud service rather than to your server's local storage.
 
 ## Known Issues
-
 1. No migration from one cloud/filesystem to another. Pick one or manually transfer things if you decide to change services. 
 2. The Rackspace Files adapter currently relies on an outdated version of the Guzzle package which causes problems authenticating to the service. See [this forum posting](https://community.rackspace.com/products/f/dedicated-hybrid-hosting-forum/8674/rackspace-public-cloud-php-opencloud-sdk-errors-due-to-outdated-certificate-authority-list/14415) for the solution which involves downloading an updated security certificate and placing it in the correct directory in the `vendor` directory. There are several issues requesting a fix but I don't know when those will be resolved. Until then, the instructions in that forum work well:
     1. Download the updated certificate authority file here: <https://curl.haxx.se/ca/cacert.pem>
@@ -42,15 +40,13 @@ It’s always recommended to backup your files and databases and to check your a
 See online issues on the [module issues](https://github.com/HBLL-Collection-Development/omeka-s-any-cloud/issues) page on GitHub.
 
 ## TODO
-
-1. - [X] Remove need for users to manually change the alias in `config/local.config.php` (v0.2.0)
-2. - [X] Move all config data to a form so users can use the admin module system to enter their credentials without the need to access server files (v0.2.0)
-3. - [X] Make config forms prettier and easier to use (v0.3.0)
-4. - [ ] Provide more detailed instructions on setting up each cloud storage system (possibly using the GitHub wiki)
+1. * [X] Remove need for users to manually change the alias in `config/local.config.php` (v0.2.0)
+2. * [X] Move all config data to a form so users can use the admin module system to enter their credentials without the need to access server files (v0.2.0)
+3. * [X] Make config forms prettier and easier to use (v0.3.0)
+4. * [ ] Provide more detailed instructions on setting up each cloud storage system (possibly using the GitHub wiki)
 
 ## Possible Enhancements
-
-1. - [ ] Add more cloud adapters (OneDrive, Box.com)
-2. - [ ] Allow migration between different cloud platforms
-3. - [ ] Support [Archive Repertory](Archive Repertory)
-4. - [ ] Support module translation
+1. * [ ] Add more cloud adapters (OneDrive, Box.com)
+2. * [ ] Allow migration between different cloud platforms
+3. * [ ] Support [Archive Repertory](Archive Repertory)
+4. * [ ] Support module translation
