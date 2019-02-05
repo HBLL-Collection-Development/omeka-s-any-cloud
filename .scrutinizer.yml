@@ -1,7 +1,4 @@
 build:
-    dependencies:
-        before:
-            - composer install --no-dev
     nodes:
         analysis:
             project_setup:
