@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Scrutinizer integration
 - Code Climate integration
+- StyleCI integration
 
 ## \[v0.3.0\] - 2019-02-03
 ### Changed
