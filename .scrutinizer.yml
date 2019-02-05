@@ -1,4 +1,5 @@
 build:
+    dependencies:
     nodes:
         analysis:
             project_setup:
@@ -25,7 +26,10 @@ checks:
         fix_identation_4spaces: true
         fix_doc_comments: true
 
-tools:
-    external_code_coverage:
-        timeout: 60
-        runs: 3
+#dependency_paths:
+#    [vendor/*]
+
+#tools:
+#    external_code_coverage:
+#        timeout: 600
+#        runs: 3
