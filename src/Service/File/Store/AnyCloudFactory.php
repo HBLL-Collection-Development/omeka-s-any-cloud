@@ -18,6 +18,7 @@ class AnyCloudFactory implements FactoryInterface
     private $uri;
     private $tempUri;
     private $adapter;
+    const AWS_BASED = ['aws', 'digital_ocean', 'scaleway'];
 
     /**
      * @param ContainerInterface $serviceLocator
@@ -40,35 +41,13 @@ class AnyCloudFactory implements FactoryInterface
      */
     private function createFilesystem()
     {
-        $adapterName = $this->getAdapter();
-        switch ($adapterName) {
-            case 'aws':
-            case 'digital_ocean':
-            case 'scaleway':
-                $aws = new Adapter\AwsAdapter;
-                $this->adapter = $aws->createAdapter($this->options);
-                break;
-            case 'azure':
-                $azure = new Adapter\AzureAdapter;
-                $this->adapter = $azure->createAdapter($this->options);
-                $this->tempUri = $azure->getUri();
-                break;
-            case 'rackspace':
-                $rackspace = new Adapter\RackspaceAdapter;
-                $this->adapter = $rackspace->createAdapter($this->options);
-                $this->tempUri = $rackspace->getUri();
-                break;
-            case 'dropbox':
-                $dropbox = new Adapter\DropboxAdapter;
-                $this->adapter = $dropbox->createAdapter($this->options);
-                break;
-            case 'google':
-                $google = new Adapter\GoogleAdapter;
-                $this->adapter = $google->createAdapter($this->options);
-                $this->tempUri = $google->getUri();
-                break;
-            default:
-                $this->adapter = null;
+        if(in_array($this->getAdapter(), self::AWS_BASED)) {
+            $adapter = new Adapter\AwsAdapter;
+            $this->adapter = $adapter->createAdapter($this->options);
+        } else {
+            $adapter = new Adapter\AzureAdapter;
+            $this->adapter = $adapter->createAdapter($this->options);
+            $this->tempUri = $adapter->getUri();
         }
 
         $this->filesystem = new Filesystem($this->adapter);
@@ -79,8 +58,7 @@ class AnyCloudFactory implements FactoryInterface
      */
     private function createUri()
     {
-        $adapterName = $this->getAdapter();
-        if($adapterName == 'aws' || $adapterName == 'digital_ocean' || $adapterName == 'scaleway') {
+        if(in_array($this->getAdapter(), self::AWS_BASED)) {
             $this->uri = dirname($this->filesystem->getAdapter()->getClient()->getObjectUrl($this->getSetting('bucket'),
                 $this->getSetting('key')));
         } else {

@@ -27,9 +27,9 @@ class GoogleAdapter implements AdapterInterface
     }
 
     /**
-     * Find the public base URL for the resource
+     * Find the public base URI for the resource
      *
-     * return string Base URL for the resource
+     * return string Base URI for the resource
      */
     public function getUri()
     {
