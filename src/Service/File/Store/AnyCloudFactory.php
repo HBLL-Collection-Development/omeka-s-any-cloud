@@ -35,6 +35,9 @@ class AnyCloudFactory implements FactoryInterface
         return new AnyCloud($this->filesystem, $this->options, $this->uri, $this->adapter);
     }
 
+    /**
+     * Create the Filesystem object
+     */
     private function createFilesystem()
     {
         $adapterName = $this->getAdapter();
@@ -71,27 +74,17 @@ class AnyCloudFactory implements FactoryInterface
         $this->filesystem = new Filesystem($this->adapter);
     }
 
+    /**
+     * Create URI for file
+     */
     private function createUri()
     {
         $adapterName = $this->getAdapter();
-        switch ($adapterName) {
-            case 'aws':
-            case 'digital_ocean':
-            case 'scaleway':
-                $this->uri = dirname($this->filesystem->getAdapter()->getClient()->getObjectUrl($this->getSetting('bucket'),
-                    $this->getSetting('key')));
-                break;
-            case 'azure':
-                $this->uri = $this->tempUri;
-                break;
-            case 'rackspace':
-                $this->uri = $this->tempUri;
-                break;
-            case 'google':
-                $this->uri = $this->tempUri;
-                break;
-            default:
-                $this->uri = null;
+        if($adapterName == 'aws' || $adapterName == 'digital_ocean' || $adapterName == 'scaleway') {
+            $this->uri = dirname($this->filesystem->getAdapter()->getClient()->getObjectUrl($this->getSetting('bucket'),
+                $this->getSetting('key')));
+        } else {
+            $this->uri = $this->tempUri;
         }
     }
 }
