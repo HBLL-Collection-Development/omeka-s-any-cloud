@@ -14,11 +14,11 @@ class ConfigForm extends Form
     public function init()
     {
         $this->addAdapter();
-        $this->addAws();
+        $this->addS3('aws', 'Amazon S3 Storage');
         $this->addAzure();
         $this->addGoogle();
-        $this->addDigitalOcean();
-        $this->addScaleway();
+        $this->addS3('digital_ocean', 'DigitalOcean Spaces', 'DigitalOcean');
+        $this->addS3('scaleway', 'Scaleway Object Storage', 'Scaleway');
         $this->addRackspace();
         $this->addDropbox();
     }
@@ -62,71 +62,76 @@ class ConfigForm extends Form
     }
 
     /**
-     * Add Amazon S3 Storage options to configuration form
+     * Add any Amazon S3-based storage adapter
+     *
+     * @param string      $id    ID used to identify adapter
+     * @param string      $name  Full name of adapter
+     * @param string|null $label Abbreviated name used for form labels
      */
-    private function addAws()
+    private function addS3($id, $name, $label = null)
     {
+        $label = $label === null ? $label : $label.' ';
         $this->add([
-            'name' => 'anycloud_aws',
+            'name' => 'anycloud_'.$id,
             'type' => Fieldset::class,
             'options' => [
-                'label' => 'AmazonS3 Storage',
+                'label' => $name,
             ],
             'attributes' => [
-                'class' => 'aws fieldset',
+                'class' => $id.' fieldset',
             ],
         ]);
-        $awsFieldset = $this->get('anycloud_aws');
+        $awsFieldset = $this->get('anycloud_'.$id);
         $awsFieldset->add([
-            'name' => 'aws_key',
+            'name' => $id.'_key',
             'type' => Element\Text::class,
             'options' => [
-                'label' => 'AWS Key',
+                'label' => $label.'AWS Key',
             ],
             'attributes' => [
-                'id' => 'aws_key',
+                'id' => $id.'_key',
             ],
         ]);
         $awsFieldset->add([
-            'name' => 'aws_secret_key',
+            'name' => $id.'_secret_key',
             'type' => Element\Text::class,
             'options' => [
-                'label' => 'AWS Secret Key',
+                'label' => $label.'AWS Secret Key',
             ],
             'attributes' => [
-                'id' => 'aws_secret_key',
+                'id' => $id.'_secret_key',
                 'cols' => '100',
             ],
         ]);
         $awsFieldset->add([
-            'name' => 'aws_bucket',
+            'name' => $id.'_bucket',
             'type' => Element\Text::class,
             'options' => [
-                'label' => 'AWS Bucket',
+                'label' => $label.'AWS Bucket',
             ],
             'attributes' => [
-                'id' => 'aws_bucket',
+                'id' => $id.'_bucket',
             ],
         ]);
         $awsFieldset->add([
-            'name' => 'aws_region',
+            'name' => $id.'_region',
             'type' => Element\Text::class,
             'options' => [
-                'label' => 'AWS Region',
+                'label' => $label.'AWS Region',
             ],
             'attributes' => [
-                'id' => 'aws_region',
+                'id' => $id.'_region',
             ],
         ]);
         $awsFieldset->add([
-            'name' => 'aws_endpoint',
+            'name' => $id.'_endpoint',
             'type' => Element\Text::class,
             'options' => [
-                'label' => 'AWS Endpoint',
+                'label' => $label.'AWS Endpoint',
                 'info' => 'Can usually leave blank unless you have a custom endpoint set up. See https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region',
             ],
             'attributes' => [
-                'id' => 'aws_endpoint',
+                'id' => $id.'_endpoint',
             ],
         ]);
     }
@@ -248,142 +253,6 @@ class ConfigForm extends Form
             ],
             'attributes' => [
                 'id' => 'google_storage_uri',
-            ],
-        ]);
-    }
-
-    /**
-     * Add DigitalOcean Spaces options to configuration form
-     */
-    private function addDigitalOcean()
-    {
-        $this->add([
-            'name' => 'anycloud_digital_ocean',
-            'type' => Fieldset::class,
-            'options' => [
-                'label' => 'DigitalOcean Spaces',
-            ],
-            'attributes' => [
-                'class' => 'digital_ocean fieldset',
-            ],
-        ]);
-        $digitaloceanFieldset = $this->get('anycloud_digital_ocean');
-        $digitaloceanFieldset->add([
-            'name' => 'digital_ocean_key',
-            'type' => Element\Text::class,
-            'options' => [
-                'label' => 'DigitalOcean AWS Key',
-            ],
-            'attributes' => [
-                'id' => 'digital_ocean_key',
-            ],
-        ]);
-        $digitaloceanFieldset->add([
-            'name' => 'digital_ocean_secret_key',
-            'type' => Element\Text::class,
-            'options' => [
-                'label' => 'DigitalOcean AWS Secret Key',
-            ],
-            'attributes' => [
-                'id' => 'digital_ocean_secret_key',
-            ],
-        ]);
-        $digitaloceanFieldset->add([
-            'name' => 'digital_ocean_bucket',
-            'type' => Element\Text::class,
-            'options' => [
-                'label' => 'DigitalOcean AWS Bucket',
-            ],
-            'attributes' => [
-                'id' => 'digital_ocean_bucket',
-            ],
-        ]);
-        $digitaloceanFieldset->add([
-            'name' => 'digital_ocean_region',
-            'type' => Element\Text::class,
-            'options' => [
-                'label' => 'DigitalOcean AWS Region',
-            ],
-            'attributes' => [
-                'id' => 'digital_ocean_region',
-            ],
-        ]);
-        $digitaloceanFieldset->add([
-            'name' => 'digital_ocean_endpoint',
-            'type' => Element\Text::class,
-            'options' => [
-                'label' => 'DigitalOcean AWS Endpoint',
-            ],
-            'attributes' => [
-                'id' => 'digital_ocean_endpoint',
-            ],
-        ]);
-    }
-
-    /**
-     * Add Scaleway Object Storage options to configuration form
-     */
-    private function addScaleway()
-    {
-        $this->add([
-            'name' => 'anycloud_scaleway',
-            'type' => Fieldset::class,
-            'options' => [
-                'label' => 'Scaleway Object Storage',
-            ],
-            'attributes' => [
-                'class' => 'scaleway fieldset',
-            ],
-        ]);
-        $scalewayFieldset = $this->get('anycloud_scaleway');
-        $scalewayFieldset->add([
-            'name' => 'scaleway_key',
-            'type' => Element\Text::class,
-            'options' => [
-                'label' => 'Scaleway AWS Key',
-            ],
-            'attributes' => [
-                'id' => 'scaleway_key',
-            ],
-        ]);
-        $scalewayFieldset->add([
-            'name' => 'scaleway_secret_key',
-            'type' => Element\Text::class,
-            'options' => [
-                'label' => 'Scaleway AWS Secret Key',
-            ],
-            'attributes' => [
-                'id' => 'scaleway_secret_key',
-            ],
-        ]);
-        $scalewayFieldset->add([
-            'name' => 'scaleway_bucket',
-            'type' => Element\Text::class,
-            'options' => [
-                'label' => 'Scaleway AWS Bucket',
-            ],
-            'attributes' => [
-                'id' => 'scaleway_bucket',
-            ],
-        ]);
-        $scalewayFieldset->add([
-            'name' => 'scaleway_region',
-            'type' => Element\Text::class,
-            'options' => [
-                'label' => 'Scaleway AWS Region',
-            ],
-            'attributes' => [
-                'id' => 'scaleway_region',
-            ],
-        ]);
-        $scalewayFieldset->add([
-            'name' => 'scaleway_endpoint',
-            'type' => Element\Text::class,
-            'options' => [
-                'label' => 'Scaleway AWS Endpoint',
-            ],
-            'attributes' => [
-                'id' => 'scaleway_endpoint',
             ],
         ]);
     }
