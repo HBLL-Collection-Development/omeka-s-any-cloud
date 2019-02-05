@@ -1,6 +1,5 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/HBLL-Collection-Development/omeka-s-any-cloud/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/HBLL-Collection-Development/omeka-s-any-cloud/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/HBLL-Collection-Development/omeka-s-any-cloud/badges/build.png?b=master)](https://scrutinizer-ci.com/g/HBLL-Collection-Development/omeka-s-any-cloud/build-status/master)
-[![Code Intelligence Status](https://scrutinizer-ci.com/g/HBLL-Collection-Development/omeka-s-any-cloud/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 
 # Any Cloud Storage (Omeka S Module)
 This module allows you to store your Omeka S files on one of the following external cloud platforms rather than the local server disk:
