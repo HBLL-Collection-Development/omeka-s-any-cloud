@@ -21,7 +21,7 @@ It is recommended that once you pick an external storage service you continue us
 ## Installation and Configuration
 1. Install the plugin by [downloading and unzipping the latest module](https://github.com/HBLL-Collection-Development/omeka-s-any-cloud/releases) and loading it into the `modules` directory of your Omeka S instance.
 2. Enable the plugin from the Admin side of your installation under “Modules”.
-3. Configure the module from the Admin side to include credentials for the cloud storage system you would like to use:
+3. Configure the module from the Admin side to include credentials for the cloud storage system you would like to use.
 
 After that, when you upload media for an item, it will upload to your selected cloud service rather than to your server's local storage.
 
