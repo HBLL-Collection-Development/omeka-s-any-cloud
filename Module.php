@@ -136,7 +136,7 @@ class Module extends AbstractModule
         $serviceLocator = $this->getServiceLocator();
         $settings = $serviceLocator->get('Omeka\Settings');
         $this->adapter = $settings->get('anycloud_adapter');
-        if (isset($this->adapter) && $this->adapter !== 'default') {
+        if (isset($this->adapter['adapter']) && $this->adapter['adapter'] !== 'default') {
             $serviceLocator->setAlias('Omeka\File\Store', File\Store\AnyCloud::class);
         }
     }
