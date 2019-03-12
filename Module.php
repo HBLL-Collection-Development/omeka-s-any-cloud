@@ -2,7 +2,7 @@
 
 namespace AnyCloud;
 
-use AnyCloud\Form\Configform;
+use AnyCloud\Form\ConfigForm;
 use Omeka\Module\AbstractModule;
 use Omeka\Module\Exception\ModuleCannotInstallException;
 use Zend\Mvc\Controller\AbstractController;
