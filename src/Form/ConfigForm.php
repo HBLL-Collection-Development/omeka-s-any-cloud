@@ -8,6 +8,9 @@ use Zend\Form\Form;
 
 class ConfigForm extends Form
 {
+    
+    protected $globalSettings;
+    
     /**
      * Initialize the configuration form.
      */
@@ -21,6 +24,14 @@ class ConfigForm extends Form
         $this->addS3('scaleway', 'Scaleway Object Storage', 'Scaleway');
         $this->addRackspace();
         $this->addDropbox();
+    }
+    
+     /**
+     * Set configuration settings.
+     */
+    public function setGlobalSettings($globalSettings)
+    {
+        $this->globalSettings = $globalSettings;
     }
 
     /**
