@@ -13,7 +13,7 @@ class ConfigFormFactory implements FactoryInterface
         $settings = $services->get('Omeka\Settings');
 
         $form = new ConfigForm(null, $options);
-        $form->setSettings($settings);
+        $form->setGlobalSettings($settings);
 
         return $form;
     }
