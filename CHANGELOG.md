@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[v1.0.0\] - 2019-03-12
+### Changed
+- Fixed `.zip` release to include `Module.php`
+- Upped version number to `v1.0.0`
+
+### Added
+- Minimum Omeka S version to `module.ini` (may work with earlier versions but only tested on 1.3.0 and up)
+
 ## \[v0.3.2\] - 2019-02-07
 ### Changed
 - Upped version number to `v0.3.2`

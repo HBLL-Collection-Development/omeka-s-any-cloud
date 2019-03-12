@@ -8,23 +8,22 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.87.3",
+            "version": "3.90.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5f9caa48b7871ff24231898c01f51580a83f59b9"
+                "reference": "3262a84de9428766646223963c944b2be2cd09c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5f9caa48b7871ff24231898c01f51580a83f59b9",
-                "reference": "5f9caa48b7871ff24231898c01f51580a83f59b9",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3262a84de9428766646223963c944b2be2cd09c0",
+                "reference": "3262a84de9428766646223963c944b2be2cd09c0",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-pcre": "*",
                 "ext-simplexml": "*",
-                "ext-spl": "*",
                 "guzzlehttp/guzzle": "^5.3.3|^6.2.1",
                 "guzzlehttp/promises": "~1.0",
                 "guzzlehttp/psr7": "^1.4.1",
@@ -87,7 +86,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2019-02-04T22:38:14+00:00"
+            "time": "2019-03-12T18:11:23+00:00"
         },
         {
             "name": "firebase/php-jwt",
@@ -184,16 +183,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.25.1",
+            "version": "v1.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "106c78d25b14f55167338d71737507be2bf8400c"
+                "reference": "ea5ac30e4120b48a92494b1de2c5230926f8c171"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/106c78d25b14f55167338d71737507be2bf8400c",
-                "reference": "106c78d25b14f55167338d71737507be2bf8400c",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/ea5ac30e4120b48a92494b1de2c5230926f8c171",
+                "reference": "ea5ac30e4120b48a92494b1de2c5230926f8c171",
                 "shasum": ""
             },
             "require": {
@@ -240,24 +239,24 @@
                 "Apache-2.0"
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
-            "time": "2018-12-18T18:55:23+00:00"
+            "time": "2019-02-06T21:40:58+00:00"
         },
         {
             "name": "google/cloud-storage",
-            "version": "v1.10.1",
+            "version": "v1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-storage.git",
-                "reference": "e34971e52e4fbc36fba37ce5e7da497976f38827"
+                "reference": "9e4b3aeebfc466671e7aa74862131a3bbd34804d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/e34971e52e4fbc36fba37ce5e7da497976f38827",
-                "reference": "e34971e52e4fbc36fba37ce5e7da497976f38827",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/9e4b3aeebfc466671e7aa74862131a3bbd34804d",
+                "reference": "9e4b3aeebfc466671e7aa74862131a3bbd34804d",
                 "shasum": ""
             },
             "require": {
-                "google/cloud-core": "^1.25"
+                "google/cloud-core": "^1.26"
             },
             "require-dev": {
                 "erusev/parsedown": "^1.6",
@@ -290,7 +289,7 @@
                 "Apache-2.0"
             ],
             "description": "Cloud Storage Client for PHP",
-            "time": "2019-01-24T20:17:27+00:00"
+            "time": "2019-02-06T21:40:58+00:00"
         },
         {
             "name": "guzzle/guzzle",
@@ -1324,16 +1323,16 @@
         },
         {
             "name": "spatie/dropbox-api",
-            "version": "1.6.6",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/dropbox-api.git",
-                "reference": "7ffa228049c36bfb62fbeba2d1a73ea8aaaac424"
+                "reference": "22f0d5b03781ef411d134b05aeb237c0eebde544"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/dropbox-api/zipball/7ffa228049c36bfb62fbeba2d1a73ea8aaaac424",
-                "reference": "7ffa228049c36bfb62fbeba2d1a73ea8aaaac424",
+                "url": "https://api.github.com/repos/spatie/dropbox-api/zipball/22f0d5b03781ef411d134b05aeb237c0eebde544",
+                "reference": "22f0d5b03781ef411d134b05aeb237c0eebde544",
                 "shasum": ""
             },
             "require": {
@@ -1376,7 +1375,7 @@
                 "spatie",
                 "v2"
             ],
-            "time": "2018-07-19T16:27:05+00:00"
+            "time": "2019-02-15T11:05:52+00:00"
         },
         {
             "name": "spatie/flysystem-dropbox",
@@ -1432,16 +1431,16 @@
         },
         {
             "name": "superbalist/flysystem-google-storage",
-            "version": "7.1.0",
+            "version": "7.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Superbalist/flysystem-google-cloud-storage.git",
-                "reference": "9b20240775ff511b63e4e1d1c9cda710f49a5fb4"
+                "reference": "97cf8a5c9a9d368260b2791ec130690a1bec0cbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Superbalist/flysystem-google-cloud-storage/zipball/9b20240775ff511b63e4e1d1c9cda710f49a5fb4",
-                "reference": "9b20240775ff511b63e4e1d1c9cda710f49a5fb4",
+                "url": "https://api.github.com/repos/Superbalist/flysystem-google-cloud-storage/zipball/97cf8a5c9a9d368260b2791ec130690a1bec0cbd",
+                "reference": "97cf8a5c9a9d368260b2791ec130690a1bec0cbd",
                 "shasum": ""
             },
             "require": {
@@ -1475,7 +1474,7 @@
                 }
             ],
             "description": "Flysystem adapter for Google Cloud Storage",
-            "time": "2018-09-20T14:55:41+00:00"
+            "time": "2019-02-21T08:07:24+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
