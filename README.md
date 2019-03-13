@@ -24,7 +24,7 @@ It is recommended that once you pick an external storage service you continue us
 2. Enable the plugin from the Admin side of your installation under “Modules”.
 3. Configure the module from the Admin side to include credentials for the cloud storage system you would like to use.
 
-After that, when you upload media for an item, it will upload to your selected cloud service rather than to your server's local storage.
+After that, when you upload media for an item, it will upload to your selected cloud service rather than to your server’s local storage.
 
 ## Known Issues
 1. No migration from one cloud/filesystem to another. Pick one or manually transfer things if you decide to change services. 
@@ -46,10 +46,12 @@ See online issues on the [module issues](https://github.com/HBLL-Collection-Deve
 2. - [X] Move all config data to a form so users can use the admin module system to enter their credentials without the need to access server files (v0.2.0)
 3. - [X] Make config forms prettier and easier to use (v0.3.0)
 4. - [X] Get a DOI for the software (v1.0.0)
-4. - [ ] Provide more detailed instructions on setting up each cloud storage system (possibly using the GitHub wiki)
+5. - [ ] Integrate a Wasabi cloud adapter
+6. - [ ] Provide more detailed instructions on setting up each cloud storage system (possibly using the GitHub wiki)
 
 ## Possible Enhancements
 1. - [ ] Add more cloud adapters (OneDrive, Box.com)
 2. - [ ] Allow migration between different cloud platforms
 3. - [ ] Support [Archive Repertory](https://github.com/Daniel-KM/Omeka-S-module-ArchiveRepertory)
-4. - [ ] Support module translation
+4. - [ ] Write tests for module
+5. - [ ] Support module translation
