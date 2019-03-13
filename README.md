@@ -51,5 +51,5 @@ See online issues on the [module issues](https://github.com/HBLL-Collection-Deve
 ## Possible Enhancements
 1. - [ ] Add more cloud adapters (OneDrive, Box.com)
 2. - [ ] Allow migration between different cloud platforms
-3. - [ ] Support [Archive Repertory](Archive Repertory)
+3. - [ ] Support [Archive Repertory](https://github.com/Daniel-KM/Omeka-S-module-ArchiveRepertory)
 4. - [ ] Support module translation
