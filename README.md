@@ -2,6 +2,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/HBLL-Collection-Development/omeka-s-any-cloud/badges/build.png?b=master)](https://scrutinizer-ci.com/g/HBLL-Collection-Development/omeka-s-any-cloud/build-status/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/88231b9bfaa4e0397ef9/maintainability)](https://codeclimate.com/github/HBLL-Collection-Development/omeka-s-any-cloud/maintainability)
 [![StyleCI](https://github.styleci.io/repos/167904424/shield)](https://github.styleci.io/repos/167904424)
+[![DOI](https://zenodo.org/badge/167904424.svg)](https://zenodo.org/badge/latestdoi/167904424)
 
 # Any Cloud Storage (Omeka S Module)
 This module allows you to store your Omeka S files on one of the following external cloud platforms rather than the local server disk:
@@ -44,7 +45,7 @@ See online issues on the [module issues](https://github.com/HBLL-Collection-Deve
 1. - [X] Remove need for users to manually change the alias in `config/local.config.php` (v0.2.0)
 2. - [X] Move all config data to a form so users can use the admin module system to enter their credentials without the need to access server files (v0.2.0)
 3. - [X] Make config forms prettier and easier to use (v0.3.0)
-4. - [ ] Get a DOI for the software
+4. - [X] Get a DOI for the software
 4. - [ ] Provide more detailed instructions on setting up each cloud storage system (possibly using the GitHub wiki)
 
 ## Possible Enhancements
