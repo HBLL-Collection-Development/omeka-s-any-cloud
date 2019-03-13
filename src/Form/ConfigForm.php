@@ -8,9 +8,9 @@ use Zend\Form\Form;
 
 class ConfigForm extends Form
 {
-    
+
     protected $globalSettings;
-    
+
     /**
      * Initialize the configuration form.
      */
@@ -25,8 +25,8 @@ class ConfigForm extends Form
         $this->addRackspace();
         $this->addDropbox();
     }
-    
-     /**
+
+    /**
      * Set configuration settings.
      */
     public function setGlobalSettings($globalSettings)
@@ -40,8 +40,8 @@ class ConfigForm extends Form
     private function addAdapter()
     {
         $this->add([
-            'name'    => 'anycloud_adapter',
-            'type'    => Fieldset::class,
+            'name' => 'anycloud_adapter',
+            'type' => Fieldset::class,
             'options' => [
                 'label' => 'Any Cloud Adapter',
             ],
@@ -51,19 +51,19 @@ class ConfigForm extends Form
         ]);
         $adapterFieldset = $this->get('anycloud_adapter');
         $adapterFieldset->add([
-            'name'    => 'adapter',
-            'type'    => Element\Select::class,
+            'name' => 'adapter',
+            'type' => Element\Select::class,
             'options' => [
-                'label'         => 'Cloud Service Adapter: ',
+                'label' => 'Cloud Service Adapter: ',
                 'value_options' => [
-                    'default'       => 'Omeka Default (local server)',
-                    'aws'           => 'Amazon S3 Storage',
-                    'azure'         => 'Microsoft Azure Storage',
-                    'google'        => 'Google Cloud Storage',
+                    'default' => 'Omeka Default (local server)',
+                    'aws' => 'Amazon S3 Storage',
+                    'azure' => 'Microsoft Azure Storage',
+                    'google' => 'Google Cloud Storage',
                     'digital_ocean' => 'DigitalOcean Spaces',
-                    'scaleway'      => 'Scaleway Object Storage',
-                    'rackspace'     => 'Rackspace Files',
-                    'dropbox'       => 'Dropbox',
+                    'scaleway' => 'Scaleway Object Storage',
+                    'rackspace' => 'Rackspace Files',
+                    'dropbox' => 'Dropbox',
                 ],
             ],
             'attributes' => [
@@ -83,8 +83,8 @@ class ConfigForm extends Form
     {
         $label = $label === null ? $label : $label.' ';
         $this->add([
-            'name'    => 'anycloud_'.$id,
-            'type'    => Fieldset::class,
+            'name' => 'anycloud_'.$id,
+            'type' => Fieldset::class,
             'options' => [
                 'label' => $name,
             ],
@@ -94,8 +94,8 @@ class ConfigForm extends Form
         ]);
         $awsFieldset = $this->get('anycloud_'.$id);
         $awsFieldset->add([
-            'name'    => $id.'_key',
-            'type'    => Element\Text::class,
+            'name' => $id.'_key',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => $label.'AWS Key',
             ],
@@ -104,19 +104,19 @@ class ConfigForm extends Form
             ],
         ]);
         $awsFieldset->add([
-            'name'    => $id.'_secret_key',
-            'type'    => Element\Text::class,
+            'name' => $id.'_secret_key',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => $label.'AWS Secret Key',
             ],
             'attributes' => [
-                'id'   => $id.'_secret_key',
+                'id' => $id.'_secret_key',
                 'cols' => '100',
             ],
         ]);
         $awsFieldset->add([
-            'name'    => $id.'_bucket',
-            'type'    => Element\Text::class,
+            'name' => $id.'_bucket',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => $label.'AWS Bucket',
             ],
@@ -125,8 +125,8 @@ class ConfigForm extends Form
             ],
         ]);
         $awsFieldset->add([
-            'name'    => $id.'_region',
-            'type'    => Element\Text::class,
+            'name' => $id.'_region',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => $label.'AWS Region',
             ],
@@ -135,11 +135,11 @@ class ConfigForm extends Form
             ],
         ]);
         $awsFieldset->add([
-            'name'    => $id.'_endpoint',
-            'type'    => Element\Text::class,
+            'name' => $id.'_endpoint',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => $label.'AWS Endpoint',
-                'info'  => 'Can usually leave blank unless you have a custom endpoint set up. See https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region',
+                'info' => 'Can usually leave blank unless you have a custom endpoint set up. See https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region',
             ],
             'attributes' => [
                 'id' => $id.'_endpoint',
@@ -153,8 +153,8 @@ class ConfigForm extends Form
     private function addAzure()
     {
         $this->add([
-            'name'    => 'anycloud_azure',
-            'type'    => Fieldset::class,
+            'name' => 'anycloud_azure',
+            'type' => Fieldset::class,
             'options' => [
                 'label' => 'Microsoft Azure Storage',
             ],
@@ -164,8 +164,8 @@ class ConfigForm extends Form
         ]);
         $azureFieldset = $this->get('anycloud_azure');
         $azureFieldset->add([
-            'name'    => 'azure_account_name',
-            'type'    => Element\Text::class,
+            'name' => 'azure_account_name',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'Azure Account Name',
             ],
@@ -174,8 +174,8 @@ class ConfigForm extends Form
             ],
         ]);
         $azureFieldset->add([
-            'name'    => 'azure_account_key',
-            'type'    => Element\Text::class,
+            'name' => 'azure_account_key',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'Azure Account Key',
             ],
@@ -184,8 +184,8 @@ class ConfigForm extends Form
             ],
         ]);
         $azureFieldset->add([
-            'name'    => 'azure_container_name',
-            'type'    => Element\Text::class,
+            'name' => 'azure_container_name',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'Azure Container Name',
             ],
@@ -194,11 +194,11 @@ class ConfigForm extends Form
             ],
         ]);
         $azureFieldset->add([
-            'name'    => 'azure_endpoint',
-            'type'    => Element\Text::class,
+            'name' => 'azure_endpoint',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'Azure Endpoint',
-                'info'  => 'Can usually leave blank unless you have a custom endpoint set up',
+                'info' => 'Can usually leave blank unless you have a custom endpoint set up',
             ],
             'attributes' => [
                 'id' => 'azure_endpoint',
@@ -212,8 +212,8 @@ class ConfigForm extends Form
     private function addGoogle()
     {
         $this->add([
-            'name'    => 'anycloud_google',
-            'type'    => Fieldset::class,
+            'name' => 'anycloud_google',
+            'type' => Fieldset::class,
             'options' => [
                 'label' => 'Google Cloud Storage',
             ],
@@ -223,8 +223,8 @@ class ConfigForm extends Form
         ]);
         $googleFieldset = $this->get('anycloud_google');
         $googleFieldset->add([
-            'name'    => 'google_project_id',
-            'type'    => Element\Text::class,
+            'name' => 'google_project_id',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'Google Project ID',
             ],
@@ -233,8 +233,8 @@ class ConfigForm extends Form
             ],
         ]);
         $googleFieldset->add([
-            'name'    => 'google_bucket_name',
-            'type'    => Element\Text::class,
+            'name' => 'google_bucket_name',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'Google Bucket Name',
             ],
@@ -243,11 +243,11 @@ class ConfigForm extends Form
             ],
         ]);
         $googleFieldset->add([
-            'name'    => 'google_credentials_path',
-            'type'    => Element\Text::class,
+            'name' => 'google_credentials_path',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'Google Credentials Path',
-                'info'  => 'Replace {CONFIG} with the name of your Google credentials file stored at the listed path',
+                'info' => 'Replace {CONFIG} with the name of your Google credentials file stored at the listed path',
                 'value' => '/src/Service/File/Adapter/Google/{CONFIG}.json',
             ],
             'attributes' => [
@@ -255,11 +255,11 @@ class ConfigForm extends Form
             ],
         ]);
         $googleFieldset->add([
-            'name'    => 'google_storage_uri',
-            'type'    => Element\Text::class,
+            'name' => 'google_storage_uri',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'Google Storage URI',
-                'info'  => 'You can usually leave this as the default unless you have tweaked other settings',
+                'info' => 'You can usually leave this as the default unless you have tweaked other settings',
                 'value' => 'https://storage.googleapis.com',
             ],
             'attributes' => [
@@ -274,8 +274,8 @@ class ConfigForm extends Form
     private function addRackspace()
     {
         $this->add([
-            'name'    => 'anycloud_rackspace',
-            'type'    => Fieldset::class,
+            'name' => 'anycloud_rackspace',
+            'type' => Fieldset::class,
             'options' => [
                 'label' => 'Rackspace Files',
             ],
@@ -285,19 +285,19 @@ class ConfigForm extends Form
         ]);
         $rackspaceFieldset = $this->get('anycloud_rackspace');
         $rackspaceFieldset->add([
-            'name'    => 'rackspace_identity_endpoint',
-            'type'    => Element\Text::class,
+            'name' => 'rackspace_identity_endpoint',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'Rackspace Identity Endpoint',
-                'info'  => 'Valid options include “US_IDENTITY_ENDPOINT” and “UK_IDENTITY_ENDPOINT”',
+                'info' => 'Valid options include “US_IDENTITY_ENDPOINT” and “UK_IDENTITY_ENDPOINT”',
             ],
             'attributes' => [
                 'id' => 'rackspace_identity_endpoint',
             ],
         ]);
         $rackspaceFieldset->add([
-            'name'    => 'rackspace_username',
-            'type'    => Element\Text::class,
+            'name' => 'rackspace_username',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'Rackspace Username',
             ],
@@ -306,8 +306,8 @@ class ConfigForm extends Form
             ],
         ]);
         $rackspaceFieldset->add([
-            'name'    => 'rackspace_password',
-            'type'    => Element\Text::class,
+            'name' => 'rackspace_password',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'Rackspace Password',
             ],
@@ -316,8 +316,8 @@ class ConfigForm extends Form
             ],
         ]);
         $rackspaceFieldset->add([
-            'name'    => 'rackspace_container',
-            'type'    => Element\Text::class,
+            'name' => 'rackspace_container',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'Rackspace Container Name',
             ],
@@ -326,8 +326,8 @@ class ConfigForm extends Form
             ],
         ]);
         $rackspaceFieldset->add([
-            'name'    => 'rackspace_region',
-            'type'    => Element\Text::class,
+            'name' => 'rackspace_region',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'Rackspace Region',
             ],
@@ -343,8 +343,8 @@ class ConfigForm extends Form
     private function addDropbox()
     {
         $this->add([
-            'name'    => 'anycloud_dropbox',
-            'type'    => Fieldset::class,
+            'name' => 'anycloud_dropbox',
+            'type' => Fieldset::class,
             'options' => [
                 'label' => 'Dropbox',
             ],
@@ -354,8 +354,8 @@ class ConfigForm extends Form
         ]);
         $dropboxFieldset = $this->get('anycloud_dropbox');
         $dropboxFieldset->add([
-            'name'    => 'dropbox_access_token',
-            'type'    => Element\Text::class,
+            'name' => 'dropbox_access_token',
+            'type' => Element\Text::class,
             'options' => [
                 'label' => 'Dropbox Access Token',
             ],
