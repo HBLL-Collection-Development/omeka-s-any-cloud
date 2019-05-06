@@ -1,9 +1,8 @@
 <?php
-    $this->headScript()->appendFile('/modules/AnyCloud/asset/scripts/toggle.js', 'text/javascript');
+    $this->headScript()->appendFile($this->assetUrl('scripts/toggle.js', 'AnyCloud'));
     $this->headLink()->appendStylesheet($this->assetUrl('styles/anycloud.css', 'AnyCloud'));
     $form->prepare();
     echo $this->form()->openTag($form);
     echo $this->formCollection($form);
     echo $this->form()->closeTag();
 ?>
-
