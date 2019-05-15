@@ -6,7 +6,6 @@ use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
 use Omeka\File\Exception\ConfigException;
 use Omeka\File\Store\StoreInterface;
-use Zend\Log\Logger;
 
 class AnyCloud implements StoreInterface
 {
