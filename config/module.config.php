@@ -22,6 +22,7 @@ return [
         'config' => [
             'anycloud_adapter'       => ['adapter' => 'default'],
             'anycloud_aws'           => [],
+            'anycloud_wasabi'        => [],
             'anycloud_digital_ocean' => [],
             'anycloud_scaleway'      => [],
             'anycloud_azure'         => [],

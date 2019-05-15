@@ -13,7 +13,7 @@ class AnyCloudFactory implements FactoryInterface
 {
     use CommonTrait;
 
-    const AWS_BASED = ['aws', 'digital_ocean', 'scaleway'];
+    const AWS_BASED = ['aws', 'wasabi', 'digital_ocean', 'scaleway'];
     protected $options;
     private $filesystem;
     private $uri;

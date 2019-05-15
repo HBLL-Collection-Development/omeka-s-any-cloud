@@ -10,6 +10,7 @@ This module allows you to store your Omeka S files on one of the following exter
 - [Amazon S3 Storage](https://aws.amazon.com/s3/)
 - [Microsoft Azure Storage](https://azure.microsoft.com/en-us/services/storage/)
 - [Google Cloud Storage](https://cloud.google.com/storage/)
+- [Wasabi Cloug Storage](https://wasabi.com) (uses the Amazon S3 Storage adapter)
 - [DigitalOcean Spaces](https://www.digitalocean.com/products/spaces/) (uses the Amazon S3 Storage adapter)
 - [Scaleway Object Storage](https://www.scaleway.com/object-storage/) (uses the Amazon S3 Storage adapter)
 - [Rackspace Files](https://www.rackspace.com/cloud/files)
@@ -46,12 +47,11 @@ See online issues on the [module issues](https://github.com/HBLL-Collection-Deve
 2. - [X] Move all config data to a form so users can use the admin module system to enter their credentials without the need to access server files (v0.2.0)
 3. - [X] Make config forms prettier and easier to use (v0.3.0)
 4. - [X] Get a DOI for the software (v1.0.0)
-5. - [ ] Integrate a Wasabi cloud adapter
+5. - [X] Integrate a Wasabi cloud adapter (v1.1.0)
 6. - [ ] Provide more detailed instructions on setting up each cloud storage system (possibly using the GitHub wiki)
 
 ## Possible Enhancements
-1. - [ ] Add more cloud adapters (OneDrive, Box.com)
-2. - [ ] Allow migration between different cloud platforms
-3. - [ ] Support [Archive Repertory](https://github.com/Daniel-KM/Omeka-S-module-ArchiveRepertory)
-4. - [ ] Write tests for module
-5. - [ ] Support module translation
+1. - [ ] Allow migration between different cloud platforms
+2. - [ ] Support [Archive Repertory](https://github.com/Daniel-KM/Omeka-S-module-ArchiveRepertory)
+3. - [ ] Write tests for module
+4. - [ ] Support module translation

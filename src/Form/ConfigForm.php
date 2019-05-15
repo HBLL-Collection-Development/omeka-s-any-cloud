@@ -19,6 +19,7 @@ class ConfigForm extends Form
         $this->addS3('aws', 'Amazon S3 Storage');
         $this->addAzure();
         $this->addGoogle();
+        $this->addS3('wasabi', 'Wasabi Cloud Storage', 'Wasabi');
         $this->addS3('digital_ocean', 'DigitalOcean Spaces', 'DigitalOcean');
         $this->addS3('scaleway', 'Scaleway Object Storage', 'Scaleway');
         $this->addRackspace();
@@ -59,6 +60,7 @@ class ConfigForm extends Form
                     'aws'           => 'Amazon S3 Storage',
                     'azure'         => 'Microsoft Azure Storage',
                     'google'        => 'Google Cloud Storage',
+                    'wasabi'        => 'Wasabi Cloud Storage',
                     'digital_ocean' => 'DigitalOcean Spaces',
                     'scaleway'      => 'Scaleway Object Storage',
                     'rackspace'     => 'Rackspace Files',

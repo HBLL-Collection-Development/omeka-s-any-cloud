@@ -6,6 +6,7 @@ use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
 use Omeka\File\Exception\ConfigException;
 use Omeka\File\Store\StoreInterface;
+use Zend\Log\Logger;
 
 class AnyCloud implements StoreInterface
 {
@@ -40,7 +41,6 @@ class AnyCloud implements StoreInterface
             $contents = fopen($source, 'r');
             $this->remoteFilesystem->put($storagePath, $contents);
             fclose($contents);
-            unlink($source);
         } catch (ConfigException $e) {
             echo 'Any Cloud Error: '.$e->getMessage()."\n";
         }
