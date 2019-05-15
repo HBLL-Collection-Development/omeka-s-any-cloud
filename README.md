@@ -10,7 +10,7 @@ This module allows you to store your Omeka S files on one of the following exter
 - [Amazon S3 Storage](https://aws.amazon.com/s3/)
 - [Microsoft Azure Storage](https://azure.microsoft.com/en-us/services/storage/)
 - [Google Cloud Storage](https://cloud.google.com/storage/)
-- [Wasabi Cloug Storage](https://wasabi.com) (uses the Amazon S3 Storage adapter)
+- [Wasabi Cloud Storage](https://wasabi.com) (uses the Amazon S3 Storage adapter)
 - [DigitalOcean Spaces](https://www.digitalocean.com/products/spaces/) (uses the Amazon S3 Storage adapter)
 - [Scaleway Object Storage](https://www.scaleway.com/object-storage/) (uses the Amazon S3 Storage adapter)
 - [Rackspace Files](https://www.rackspace.com/cloud/files)
