@@ -4,9 +4,6 @@
 [![StyleCI](https://github.styleci.io/repos/167904424/shield)](https://github.styleci.io/repos/167904424)
 [![DOI](https://zenodo.org/badge/167904424.svg)](https://zenodo.org/badge/latestdoi/167904424)
 
-# KNOWN ISSUE
-**Since version 1.4.0 of Omeka S, the AnyCloud module does not correctly generate derivative images. See issue #7. A fix will be pushed out soon.—Jared 2019-05-15**
-
 # Any Cloud Storage (Omeka S Module)
 This module allows you to store your Omeka S files on one of the following external cloud platforms rather than the local server disk:
 
