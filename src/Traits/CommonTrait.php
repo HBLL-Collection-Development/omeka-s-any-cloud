@@ -23,7 +23,7 @@ trait CommonTrait
     }
 
     /**
-     * Get the adapter
+     * Get the adapter.
      *
      * @return string Adapter name as a string
      */
@@ -35,7 +35,7 @@ trait CommonTrait
     }
 
     /**
-     * Get the setting
+     * Get the setting.
      *
      * @param string $name Name of the desired setting to retrieve
      *

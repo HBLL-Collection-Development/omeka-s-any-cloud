@@ -22,7 +22,7 @@ class AwsAdapter implements AdapterInterface
         $this->options = $options;
         $this->createClient();
 
-        return new AwsS3Adapter($this->client, (string)$this->getSetting('bucket'));
+        return new AwsS3Adapter($this->client, (string) $this->getSetting('bucket'));
     }
 
     /**
