@@ -36,7 +36,7 @@ class AzureAdapter implements AdapterInterface
             $this->createClient();
         }
 
-        return empty($this->getSetting('endpoint')) ? 'https://'.$this->getSetting('account_name').'.blob.core.windows.net/'.$this->getSetting('container_name') : (string)$this->getSetting('endpoint');
+        return empty($this->getSetting('endpoint')) ? 'https://'.$this->getSetting('account_name').'.blob.core.windows.net/'.$this->getSetting('container_name') : (string) $this->getSetting('endpoint');
     }
 
     /**

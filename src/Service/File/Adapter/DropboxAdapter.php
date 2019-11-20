@@ -43,7 +43,7 @@ class DropboxAdapter implements AdapterInterface
         $this->optionExists('access_token');
 
         try {
-            $this->client = new Client((string)$this->getSetting('access_token'));
+            $this->client = new Client((string) $this->getSetting('access_token'));
         } catch (ConfigException $e) {
             echo 'Dropbox Error: '.$e->getMessage()."\n";
         }
