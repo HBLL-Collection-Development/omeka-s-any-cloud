@@ -34,7 +34,7 @@ class AnyCloud implements StoreInterface
     /**
      * {@inheritdoc}
      */
-    public function put($source, $storagePath)
+    public function put($source, $storagePath): void
     {
         try {
             $contents = fopen($source, 'r');
@@ -48,7 +48,7 @@ class AnyCloud implements StoreInterface
     /**
      * {@inheritdoc}
      */
-    public function delete($storagePath)
+    public function delete($storagePath): void
     {
         try {
             $this->remoteFilesystem->delete($storagePath);
@@ -60,7 +60,7 @@ class AnyCloud implements StoreInterface
     /**
      * {@inheritdoc}
      */
-    public function getUri($storagePath)
+    public function getUri($storagePath): string
     {
         // Kludgy solution to working with temporary Dropbox URIs
         if ($this->uri === null && is_object($this->adapter)) {

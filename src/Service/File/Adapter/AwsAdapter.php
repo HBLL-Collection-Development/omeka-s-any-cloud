@@ -17,15 +17,18 @@ class AwsAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function createAdapter($options)
+    public function createAdapter($options): AwsS3Adapter
     {
         $this->options = $options;
         $this->createClient();
 
-        return new AwsS3Adapter($this->client, $this->getSetting('bucket'));
+        return new AwsS3Adapter($this->client, (string)$this->getSetting('bucket'));
     }
 
-    private function createClient()
+    /**
+     * Create client.
+     */
+    private function createClient(): void
     {
         $this->optionExists('key');
         $this->optionExists('secret_key');

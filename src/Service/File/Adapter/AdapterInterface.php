@@ -2,6 +2,8 @@
 
 namespace AnyCloud\Service\File\Adapter;
 
+use Omeka\File\Exception\ConfigException;
+
 /**
  * Interface for AnyCloud adapters.
  *
@@ -14,7 +16,7 @@ interface AdapterInterface
      *
      * @param array $options Array of options needed to create an adapter
      *
-     * return object Adapter needed to create the appropriate Filesystem object
+     * @return object Adapter needed to create the appropriate Filesystem object
      */
     public function createAdapter($options);
 
@@ -24,11 +26,9 @@ interface AdapterInterface
      * @param string $option    Array key value of option to check if it exists
      * @param bool   $allowNull Whether or not a `null` value is allowed for this option
      *
-     * return bool `true` if value exists or is allowed to be `null`
+     * @return bool `true` if value exists or is allowed to be `null`
      *
-     * @return bool
-     *
-     * throws ConfigException if option not set correctly
+     * @throws ConfigException if option not set correctly
      */
-    public function optionExists($option, $allowNull = false);
+    public function optionExists($option, $allowNull = false): bool;
 }

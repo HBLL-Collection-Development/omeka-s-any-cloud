@@ -17,7 +17,7 @@ class GoogleAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function createAdapter($options)
+    public function createAdapter($options): GoogleStorageAdapter
     {
         $this->options = $options;
         $this->createClient();
@@ -29,9 +29,9 @@ class GoogleAdapter implements AdapterInterface
     /**
      * Find the public base URI for the resource.
      *
-     * return string Base URI for the resource
+     * @return string Base URI for the resource
      */
-    public function getUri()
+    public function getUri(): string
     {
         return $this->getSetting('storage_uri').'/'.$this->getSetting('bucket_name');
     }
@@ -39,7 +39,7 @@ class GoogleAdapter implements AdapterInterface
     /**
      * Create client.
      */
-    private function createClient()
+    private function createClient(): void
     {
         $this->optionExists('project_id');
         $this->optionExists('bucket_name');

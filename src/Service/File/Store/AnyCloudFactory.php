@@ -13,7 +13,8 @@ class AnyCloudFactory implements FactoryInterface
 {
     use CommonTrait;
 
-    const AWS_BASED = ['aws', 'wasabi', 'digital_ocean', 'scaleway'];
+    private const AWS_BASED = ['aws', 'wasabi', 'digital_ocean', 'scaleway'];
+
     protected $options;
     private $filesystem;
     private $uri;
@@ -39,25 +40,44 @@ class AnyCloudFactory implements FactoryInterface
     /**
      * Create the Filesystem object.
      */
-    private function createFilesystem()
+    private function createFilesystem(): void
     {
-        if (in_array($this->getAdapter(), self::AWS_BASED)) {
+        if (in_array($this->getAdapter(), self::AWS_BASED, true)) {
             $adapter = new Adapter\AwsAdapter();
             $this->adapter = $adapter->createAdapter($this->options);
-        } else {
-            $adapter = new Adapter\AzureAdapter();
-            $this->adapter = $adapter->createAdapter($this->options);
-            $this->tempUri = $adapter->getUri();
         }
+
+        switch ($this->getAdapter()) {
+            case 'azure':
+                $azure = new Adapter\AzureAdapter;
+                $this->adapter = $azure->createAdapter($this->options);
+                $this->tempUri = $azure->getUri();
+                break;
+            case 'rackspace':
+                $rackspace = new Adapter\RackspaceAdapter;
+                $this->adapter = $rackspace->createAdapter($this->options);
+                $this->tempUri = $rackspace->getUri();
+                break;
+            case 'dropbox':
+                $dropbox = new Adapter\DropboxAdapter;
+                $this->adapter = $dropbox->createAdapter($this->options);
+                break;
+            case 'google':
+                $google = new Adapter\GoogleAdapter;
+                $this->adapter = $google->createAdapter($this->options);
+                $this->tempUri = $google->getUri();
+                break;
+        }
+
         $this->filesystem = new Filesystem($this->adapter);
     }
 
     /**
      * Create URI for file.
      */
-    private function createUri()
+    private function createUri(): void
     {
-        if (in_array($this->getAdapter(), self::AWS_BASED)) {
+        if (in_array($this->getAdapter(), self::AWS_BASED, true)) {
             $this->uri = dirname($this->filesystem->getAdapter()->getClient()->getObjectUrl($this->getSetting('bucket'),
                 $this->getSetting('key')));
         } else {

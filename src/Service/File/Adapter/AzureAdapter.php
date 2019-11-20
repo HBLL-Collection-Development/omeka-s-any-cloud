@@ -17,7 +17,7 @@ class AzureAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function createAdapter($options)
+    public function createAdapter($options): AzureBlobStorageAdapter
     {
         $this->options = $options;
         $this->createClient();
@@ -28,21 +28,21 @@ class AzureAdapter implements AdapterInterface
     /**
      * Find the public base URL for the resource.
      *
-     * return string Base URL for the resource
+     * @return string
      */
-    public function getUri()
+    public function getUri(): string
     {
         if (empty($this->Uri)) {
             $this->createClient();
         }
 
-        return empty($this->getSetting('endpoint')) ? 'https://'.$this->getSetting('account_name').'.blob.core.windows.net/'.$this->getSetting('container_name') : $this->getSetting('endpoint');
+        return empty($this->getSetting('endpoint')) ? 'https://'.$this->getSetting('account_name').'.blob.core.windows.net/'.$this->getSetting('container_name') : (string)$this->getSetting('endpoint');
     }
 
     /**
      * Create client.
      */
-    private function createClient()
+    private function createClient(): void
     {
         $this->optionExists('account_name');
         $this->optionExists('account_key');

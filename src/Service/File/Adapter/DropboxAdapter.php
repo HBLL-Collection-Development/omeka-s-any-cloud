@@ -17,7 +17,7 @@ class DropboxAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function createAdapter($options)
+    public function createAdapter($options): FlyDropboxAdapter
     {
         $this->options = $options;
         $this->createClient();
@@ -30,22 +30,20 @@ class DropboxAdapter implements AdapterInterface
      *
      * This is actually generated on the fly in `AnyCloudFactory.php`
      * because all Dropbox URIs are temporary and expire
-     *
-     * return string Base URL for the resource
      */
-    public function getUri()
+    public function getUri(): void
     {
     }
 
     /**
      * Create client.
      */
-    private function createClient()
+    private function createClient(): void
     {
         $this->optionExists('access_token');
 
         try {
-            $this->client = new Client($this->getSetting('access_token'));
+            $this->client = new Client((string)$this->getSetting('access_token'));
         } catch (ConfigException $e) {
             echo 'Dropbox Error: '.$e->getMessage()."\n";
         }

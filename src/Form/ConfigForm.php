@@ -13,7 +13,7 @@ class ConfigForm extends Form
     /**
      * Initialize the configuration form.
      */
-    public function init()
+    public function init(): void
     {
         $this->addAdapter();
         $this->addS3('aws', 'Amazon S3 Storage');
@@ -29,7 +29,7 @@ class ConfigForm extends Form
     /**
      * Set configuration settings.
      */
-    public function setGlobalSettings($globalSettings)
+    public function setGlobalSettings($globalSettings): void
     {
         $this->globalSettings = $globalSettings;
     }
@@ -37,7 +37,7 @@ class ConfigForm extends Form
     /**
      * Add adapter drop-down options to configuration form.
      */
-    private function addAdapter()
+    private function addAdapter(): void
     {
         $this->add([
             'name'    => 'anycloud_adapter',
@@ -80,7 +80,7 @@ class ConfigForm extends Form
      * @param string      $name  Full name of adapter
      * @param string|null $label Abbreviated name used for form labels
      */
-    private function addS3($id, $name, $label = null)
+    private function addS3($id, $name, $label = null): void
     {
         $label = $label === null ? $label : $label.' ';
         $this->add([
@@ -151,7 +151,7 @@ class ConfigForm extends Form
     /**
      * Add Microsoft Azure Storage options to configuration form.
      */
-    private function addAzure()
+    private function addAzure(): void
     {
         $this->add([
             'name'    => 'anycloud_azure',
@@ -210,7 +210,7 @@ class ConfigForm extends Form
     /**
      * Add Google Cloud Storage options to configuration form.
      */
-    private function addGoogle()
+    private function addGoogle(): void
     {
         $this->add([
             'name'    => 'anycloud_google',
@@ -272,7 +272,7 @@ class ConfigForm extends Form
     /**
      * Add Rackspace Files options to configuration form.
      */
-    private function addRackspace()
+    private function addRackspace(): void
     {
         $this->add([
             'name'    => 'anycloud_rackspace',
@@ -341,7 +341,7 @@ class ConfigForm extends Form
     /**
      * Add Dropbox options to configuration form.
      */
-    private function addDropbox()
+    private function addDropbox(): void
     {
         $this->add([
             'name'    => 'anycloud_dropbox',

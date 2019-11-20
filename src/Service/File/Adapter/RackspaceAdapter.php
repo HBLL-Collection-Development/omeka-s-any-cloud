@@ -5,6 +5,7 @@ namespace AnyCloud\Service\File\Adapter;
 use AnyCloud\Traits\CommonTrait;
 use League\Flysystem\Rackspace\RackspaceAdapter as RSAdapter;
 use Omeka\File\Exception\ConfigException;
+use OpenCloud\Common\Exceptions\CdnNotAvailableError;
 use OpenCloud\OpenStack;
 
 class RackspaceAdapter implements AdapterInterface
@@ -18,7 +19,7 @@ class RackspaceAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function createAdapter($options)
+    public function createAdapter($options): RSAdapter
     {
         $this->options = $options;
         $this->createClient();
@@ -29,9 +30,9 @@ class RackspaceAdapter implements AdapterInterface
     /**
      * Find the public base URL for the resource.
      *
-     * return string Base URL for the resource
+     * @return string Base URL for the resource
      */
-    public function getUri()
+    public function getUri(): string
     {
         if (empty($this->Uri)) {
             $this->createClient();
@@ -43,7 +44,7 @@ class RackspaceAdapter implements AdapterInterface
     /**
      * Create client.
      */
-    private function createClient()
+    private function createClient(): void
     {
         $this->optionExists('identity_endpoint');
         $this->optionExists('username');
@@ -60,7 +61,7 @@ class RackspaceAdapter implements AdapterInterface
             $store = $client->objectStoreService('cloudFiles', $this->getSetting('region'), 'publicURL');
             $this->client = $store->getContainer($this->getSetting('container'));
             $this->uri = $this->client->getCdn()->getCdnUri();
-        } catch (\OpenCloud\Common\Exceptions\CdnNotAvailableError $e) {
+        } catch (CdnNotAvailableError $e) {
             echo 'Rackspace Error: '.$e->getMessage()."\n";
         } catch (ConfigException $e) {
             echo 'Rackspace Error: '.$e->getMessage()."\n";
