@@ -14,12 +14,22 @@ class Module extends AbstractModule
 {
     public $adapter;
 
-    public function getConfig()
+    /**
+     * Get config file.
+     *
+     * @return array Config file
+     */
+    public function getConfig(): array
     {
         return include __DIR__.'/config/module.config.php';
     }
 
-    public function onBootstrap(MvcEvent $event)
+    /**
+     * Code to run when first using the module.
+     *
+     * @param MvcEvent $event
+     */
+    public function onBootstrap(MvcEvent $event): void
     {
         parent::onBootstrap($event);
 
@@ -32,7 +42,7 @@ class Module extends AbstractModule
      *
      * @param ServiceLocatorInterface $serviceLocator
      */
-    public function install(ServiceLocatorInterface $serviceLocator)
+    public function install(ServiceLocatorInterface $serviceLocator): void
     {
         if (!file_exists(__DIR__.'/vendor/autoload.php')) {
             throw new ModuleCannotInstallException('The Any Cloud components via composer should be installed. See module’s installation documentation.');
@@ -46,7 +56,7 @@ class Module extends AbstractModule
      *
      * @param ServiceLocatorInterface $serviceLocator
      */
-    public function uninstall(ServiceLocatorInterface $serviceLocator)
+    public function uninstall(ServiceLocatorInterface $serviceLocator): void
     {
         $settings = $serviceLocator->get('Omeka\Settings');
         $this->manageSettings($settings, 'uninstall');
@@ -59,12 +69,19 @@ class Module extends AbstractModule
      * @param string                  $newVersion
      * @param ServiceLocatorInterface $serviceLocator
      */
-    public function upgrade($oldVersion, $newVersion, ServiceLocatorInterface $serviceLocator)
+    public function upgrade($oldVersion, $newVersion, ServiceLocatorInterface $serviceLocator): void
     {
         require_once 'data/scripts/upgrade.php';
     }
 
-    public function getConfigForm(PhpRenderer $renderer)
+    /**
+     * Get the configuration form.
+     *
+     * @param PhpRenderer $renderer Render the form
+     *
+     * @return string HTML string of configuration form for module
+     */
+    public function getConfigForm(PhpRenderer $renderer): string
     {
         $services = $this->getServiceLocator();
         $config = $services->get('Config');
@@ -84,7 +101,14 @@ class Module extends AbstractModule
         return $html;
     }
 
-    public function handleConfigForm(AbstractController $controller)
+    /**
+     * Handle the config form.
+     *
+     * @param AbstractController $controller
+     *
+     * @return bool|null
+     */
+    public function handleConfigForm(AbstractController $controller): ?bool
     {
         $serviceLocator = $this->getServiceLocator();
         $settings = $serviceLocator->get('Omeka\Settings');
@@ -103,6 +127,8 @@ class Module extends AbstractModule
         foreach ($params as $name => $value) {
             $settings->set($name, $value);
         }
+
+        return null;
     }
 
     /**
@@ -112,7 +138,7 @@ class Module extends AbstractModule
      * @param string                  $process  Process used to manage setting (`install` or `uninstall`)
      * @param string                  $key      Name of $settings key to manage
      */
-    protected function manageSettings($settings, $process, $key = 'config')
+    protected function manageSettings($settings, $process, $key = 'config'): void
     {
         $config = require __DIR__.'/config/module.config.php';
         $defaultSettings = $config[strtolower(__NAMESPACE__)][$key];
@@ -131,7 +157,7 @@ class Module extends AbstractModule
     /**
      * Override default file store alias to use Any Cloud module for uploads instead.
      */
-    private function setFileStoreAlias()
+    private function setFileStoreAlias(): void
     {
         $serviceLocator = $this->getServiceLocator();
         $settings = $serviceLocator->get('Omeka\Settings');
@@ -141,6 +167,13 @@ class Module extends AbstractModule
         }
     }
 
+    /**
+     * Get the default settings.
+     *
+     * @param string $key The desired config to grab
+     *
+     * @return mixed
+     */
     private function getDefaultSettings($key = 'config')
     {
         $serviceLocator = $this->getServiceLocator();
