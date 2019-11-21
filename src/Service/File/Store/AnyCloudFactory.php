@@ -44,31 +44,27 @@ class AnyCloudFactory implements FactoryInterface
     {
         if (in_array($this->getAdapter(), self::AWS_BASED, true)) {
             $adapter = new Adapter\AwsAdapter();
-            $this->adapter = $adapter->createAdapter($this->options);
         }
 
         switch ($this->getAdapter()) {
             case 'azure':
-                $azure = new Adapter\AzureAdapter();
-                $this->adapter = $azure->createAdapter($this->options);
-                $this->tempUri = $azure->getUri();
+                $adapter = new Adapter\AzureAdapter();
+                $this->tempUri = $adapter->getUri();
                 break;
             case 'rackspace':
-                $rackspace = new Adapter\RackspaceAdapter();
-                $this->adapter = $rackspace->createAdapter($this->options);
-                $this->tempUri = $rackspace->getUri();
+                $adapter = new Adapter\RackspaceAdapter();
+                $this->tempUri = $adapter->getUri();
                 break;
             case 'dropbox':
-                $dropbox = new Adapter\DropboxAdapter();
-                $this->adapter = $dropbox->createAdapter($this->options);
+                $adapter = new Adapter\DropboxAdapter();
                 break;
             case 'google':
-                $google = new Adapter\GoogleAdapter();
-                $this->adapter = $google->createAdapter($this->options);
-                $this->tempUri = $google->getUri();
+                $adapter = new Adapter\GoogleAdapter();
+                $this->tempUri = $adapter->getUri();
                 break;
         }
 
+        $this->adapter    = $adapter->createAdapter($this->options);
         $this->filesystem = new Filesystem($this->adapter);
     }
 
