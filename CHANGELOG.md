@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upped version number to `v1.1.3`
 - Fixed code style errors
-- Fixed issue #10 (hopefully for real this time)
+- Made more compatible with PHP 7
 
 ## \[v1.1.2\] - 2019-11-20
 ### Changed
