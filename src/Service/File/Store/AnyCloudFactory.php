@@ -13,6 +13,8 @@ class AnyCloudFactory implements FactoryInterface
 {
     use CommonTrait;
 
+    private const AWS_BASED = ['aws', 'wasabi', 'digital_ocean', 'scaleway'];
+
     protected $options;
     private $filesystem;
     private $uri;
@@ -40,34 +42,90 @@ class AnyCloudFactory implements FactoryInterface
      */
     private function createFilesystem(): void
     {
-        switch ($this->getAdapter()) {
-            case 'aws':
-            case 'wasabi':
-            case 'digital_ocean':
-            case 'scaleway':
-                $adapter = new Adapter\AwsAdapter();
-                break;
-            case 'azure':
-                $adapter = new Adapter\AzureAdapter();
-                $this->tempUri = $adapter->getUri();
-                break;
-            case 'rackspace':
-                $adapter = new Adapter\RackspaceAdapter();
-                $this->tempUri = $adapter->getUri();
-                break;
-            case 'dropbox':
-                $adapter = new Adapter\DropboxAdapter();
-                break;
-            case 'google':
-                $adapter = new Adapter\GoogleAdapter();
-                $this->tempUri = $adapter->getUri();
-                break;
-            default:
-                $adapter = null;
-        }
+        $this->createAwsAdapter();
+        $this->createAzureAdapter();
+        $this->createRackspaceAdapter();
+        $this->createDropboxAdapter();
+        $this->createGoogleAdapter();
 
-        $this->adapter    = $adapter->createAdapter($this->options);
         $this->filesystem = new Filesystem($this->adapter);
+    }
+
+    /**
+     * Create adapter
+     *
+     * @param object $adapter Adapter to create
+     */
+    private function createAdapter($adapter): void
+    {
+        $this->adapter = $adapter->createAdapter($this->options);
+    }
+
+    /**
+     * Create a temporary URI to store the file before saving
+     *
+     * @param object $adapter Adapter to create a temporary URI for
+     */
+    private function createTempUri($adapter): void
+    {
+        $this->tempUri = $adapter->getUri();
+    }
+
+    /**
+     * Create new AWS adapter
+     */
+    private function createAwsAdapter(): void
+    {
+        if (in_array($this->getAdapter(), self::AWS_BASED, true)) {
+            $this->createAdapter(new Adapter\AwsAdapter());
+        }
+    }
+
+    /**
+     * Create new Azure adapter
+     */
+    private function createAzureAdapter(): void
+    {
+        if ($this->getAdapter() === 'azure') {
+            $adapter = new Adapter\AzureAdapter();
+            $this->createAdapter($adapter);
+            $this->createTempUri($adapter);
+        }
+    }
+
+    /**
+     * Create new Rackspace adapter
+     */
+    private function createRackspaceAdapter(): void
+    {
+        if ($this->getAdapter() === 'rackspace') {
+            $adapter = new Adapter\RackspaceAdapter();
+            $this->createAdapter($adapter);
+            $this->createTempUri($adapter);
+        }
+    }
+
+    /**
+     * Create new Dropbox adapter
+     */
+    private function createDropboxAdapter(): void
+    {
+        if ($this->getAdapter() === 'dropbox') {
+            $adapter = new Adapter\DropboxAdapter();
+            $this->createAdapter($adapter);
+        }
+    }
+
+    /**
+     * Create new Google adapter
+     */
+    private function createGoogleAdapter(): void
+    {
+        if ($this->getAdapter() === 'google') {
+            $adapter = new Adapter\GoogleAdapter();
+            $this->createAdapter($adapter);
+            $this->createTempUri($adapter);
+        }
     }
 
     /**
