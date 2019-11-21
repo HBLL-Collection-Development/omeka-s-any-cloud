@@ -13,8 +13,6 @@ class AnyCloudFactory implements FactoryInterface
 {
     use CommonTrait;
 
-    private const AWS_BASED = ['aws', 'wasabi', 'digital_ocean', 'scaleway'];
-
     protected $options;
     private $filesystem;
     private $uri;
@@ -42,11 +40,13 @@ class AnyCloudFactory implements FactoryInterface
      */
     private function createFilesystem(): void
     {
-        if (in_array($this->getAdapter(), self::AWS_BASED, true)) {
-            $adapter = new Adapter\AwsAdapter();
-        }
-
         switch ($this->getAdapter()) {
+            case 'aws':
+            case 'wasabi':
+            case 'digital_ocean':
+            case 'scaleway':
+                $adapter = new Adapter\AwsAdapter();
+                break;
             case 'azure':
                 $adapter = new Adapter\AzureAdapter();
                 $this->tempUri = $adapter->getUri();
@@ -62,6 +62,8 @@ class AnyCloudFactory implements FactoryInterface
                 $adapter = new Adapter\GoogleAdapter();
                 $this->tempUri = $adapter->getUri();
                 break;
+            default:
+                $adapter = null;
         }
 
         $this->adapter    = $adapter->createAdapter($this->options);
