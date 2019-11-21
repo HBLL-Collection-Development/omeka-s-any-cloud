@@ -52,7 +52,7 @@ class AnyCloudFactory implements FactoryInterface
     }
 
     /**
-     * Create adapter
+     * Create adapter.
      *
      * @param object $adapter Adapter to create
      */
@@ -62,7 +62,7 @@ class AnyCloudFactory implements FactoryInterface
     }
 
     /**
-     * Create a temporary URI to store the file before saving
+     * Create a temporary URI to store the file before saving.
      *
      * @param object $adapter Adapter to create a temporary URI for
      */
@@ -72,7 +72,7 @@ class AnyCloudFactory implements FactoryInterface
     }
 
     /**
-     * Create new AWS adapter
+     * Create new AWS adapter.
      */
     private function createAwsAdapter(): void
     {
@@ -82,7 +82,7 @@ class AnyCloudFactory implements FactoryInterface
     }
 
     /**
-     * Create new Azure adapter
+     * Create new Azure adapter.
      */
     private function createAzureAdapter(): void
     {
@@ -94,7 +94,7 @@ class AnyCloudFactory implements FactoryInterface
     }
 
     /**
-     * Create new Rackspace adapter
+     * Create new Rackspace adapter.
      */
     private function createRackspaceAdapter(): void
     {
@@ -106,7 +106,7 @@ class AnyCloudFactory implements FactoryInterface
     }
 
     /**
-     * Create new Dropbox adapter
+     * Create new Dropbox adapter.
      */
     private function createDropboxAdapter(): void
     {
@@ -117,7 +117,7 @@ class AnyCloudFactory implements FactoryInterface
     }
 
     /**
-     * Create new Google adapter
+     * Create new Google adapter.
      */
     private function createGoogleAdapter(): void
     {
