@@ -4,7 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## \[v1.1.3\] - 2020-01-19
+## \[v1.1.5\] - 2020-06-17
+### Changed
+- Upped version number to `v1.1.5`
+- Added public visibility for Scaleway cloud items by default (thanks @jajm)
+
+## \[v1.1.4\] - 2020-01-19
 ### Changed
 - Upped version number to `v1.1.4`
 - Added `README.md` to binary download
