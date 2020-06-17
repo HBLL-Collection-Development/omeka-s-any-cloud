@@ -2,6 +2,7 @@
 
 namespace AnyCloud\File\Store;
 
+use League\Flysystem\AdapterInterface;
 use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
 use Omeka\File\Exception\ConfigException;
@@ -38,7 +39,8 @@ class AnyCloud implements StoreInterface
     {
         try {
             $contents = fopen($source, 'r');
-            $this->remoteFilesystem->put($storagePath, $contents);
+            $config = ['visibility' => AdapterInterface::VISIBILITY_PUBLIC];
+            $this->remoteFilesystem->put($storagePath, $contents, $config);
             fclose($contents);
         } catch (ConfigException $e) {
             echo 'Any Cloud Error: '.$e->getMessage()."\n";
