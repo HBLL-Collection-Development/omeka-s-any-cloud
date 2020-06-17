@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## \[v1.1.5\] - 2020-06-17
 ### Changed
 - Upped version number to `v1.1.5`
-- Added public visibility for Scaleway cloud items by default (thanks @jajm)
+- Added public visibility for all S3 Storage adapter cloud items by default (thanks @jajm)
 
 ## \[v1.1.4\] - 2020-01-19
 ### Changed
