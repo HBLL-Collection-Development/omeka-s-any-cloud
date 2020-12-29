@@ -7,7 +7,7 @@ use AnyCloud\Service\File\Adapter;
 use AnyCloud\Traits\CommonTrait;
 use Interop\Container\ContainerInterface;
 use League\Flysystem\Filesystem;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class AnyCloudFactory implements FactoryInterface
 {
