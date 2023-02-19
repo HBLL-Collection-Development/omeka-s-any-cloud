@@ -2,7 +2,6 @@
 
 namespace AnyCloud\File\Store;
 
-use AnyCloud\Service\File\Store\AnyCloudFactory;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\Visibility;
