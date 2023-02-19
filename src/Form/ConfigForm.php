@@ -22,7 +22,6 @@ class ConfigForm extends Form
         $this->addS3('wasabi', 'Wasabi Cloud Storage', 'Wasabi');
         $this->addS3('digital_ocean', 'DigitalOcean Spaces', 'DigitalOcean');
         $this->addS3('scaleway', 'Scaleway Object Storage', 'Scaleway');
-        $this->addRackspace();
         $this->addDropbox();
     }
 
@@ -63,7 +62,6 @@ class ConfigForm extends Form
                     'wasabi'        => 'Wasabi Cloud Storage',
                     'digital_ocean' => 'DigitalOcean Spaces',
                     'scaleway'      => 'Scaleway Object Storage',
-                    'rackspace'     => 'Rackspace Files',
                     'dropbox'       => 'Dropbox',
                 ],
             ],
@@ -265,75 +263,6 @@ class ConfigForm extends Form
             ],
             'attributes' => [
                 'id' => 'google_storage_uri',
-            ],
-        ]);
-    }
-
-    /**
-     * Add Rackspace Files options to configuration form.
-     */
-    private function addRackspace(): void
-    {
-        $this->add([
-            'name'    => 'anycloud_rackspace',
-            'type'    => Fieldset::class,
-            'options' => [
-                'label' => 'Rackspace Files',
-            ],
-            'attributes' => [
-                'class' => 'rackspace fieldset',
-            ],
-        ]);
-        $rackspaceFieldset = $this->get('anycloud_rackspace');
-        $rackspaceFieldset->add([
-            'name'    => 'rackspace_identity_endpoint',
-            'type'    => Element\Text::class,
-            'options' => [
-                'label' => 'Rackspace Identity Endpoint',
-                'info'  => 'Valid options include “US_IDENTITY_ENDPOINT” and “UK_IDENTITY_ENDPOINT”',
-            ],
-            'attributes' => [
-                'id' => 'rackspace_identity_endpoint',
-            ],
-        ]);
-        $rackspaceFieldset->add([
-            'name'    => 'rackspace_username',
-            'type'    => Element\Text::class,
-            'options' => [
-                'label' => 'Rackspace Username',
-            ],
-            'attributes' => [
-                'id' => 'rackspace_username',
-            ],
-        ]);
-        $rackspaceFieldset->add([
-            'name'    => 'rackspace_password',
-            'type'    => Element\Text::class,
-            'options' => [
-                'label' => 'Rackspace Password',
-            ],
-            'attributes' => [
-                'id' => 'rackspace_password',
-            ],
-        ]);
-        $rackspaceFieldset->add([
-            'name'    => 'rackspace_container',
-            'type'    => Element\Text::class,
-            'options' => [
-                'label' => 'Rackspace Container Name',
-            ],
-            'attributes' => [
-                'id' => 'rackspace_container',
-            ],
-        ]);
-        $rackspaceFieldset->add([
-            'name'    => 'rackspace_region',
-            'type'    => Element\Text::class,
-            'options' => [
-                'label' => 'Rackspace Region',
-            ],
-            'attributes' => [
-                'id' => 'rackspace_region',
             ],
         ]);
     }
