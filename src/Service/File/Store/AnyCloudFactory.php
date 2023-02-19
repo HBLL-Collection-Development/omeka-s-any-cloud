@@ -120,13 +120,6 @@ class AnyCloudFactory implements FactoryInterface
      */
     private function createUri(): void
     {
-        /*if (in_array($this->getAdapter(), self::AWS_BASED, true)) {
-            $this->uri = dirname($this->filesystem->getObjectUrl(
-                $this->getSetting('bucket'),
-                $this->getSetting('key')
-            ));
-        } else {*/
-            $this->uri = $this->tempUri;
-        //}
+        $this->uri = $this->tempUri;
     }
 }
