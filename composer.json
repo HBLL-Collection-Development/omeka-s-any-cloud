@@ -1,10 +1,10 @@
 {
     "require": {
-        "league/flysystem": "^1.0.49",
-        "league/flysystem-aws-s3-v3": "^1.0.21",
-        "league/flysystem-azure-blob-storage": "^0.1.4",
-        "league/flysystem-rackspace": "^1.0.5",
-        "spatie/flysystem-dropbox" : "^1.0.6",
-        "superbalist/flysystem-google-storage": "^7.1.0"
+        "php": ">=7.4",
+        "league/flysystem": "^3.0.0",
+        "league/flysystem-aws-s3-v3": "^3.12",
+        "league/flysystem-azure-blob-storage": "^3.10",
+        "spatie/flysystem-dropbox": "^2.0",
+        "league/flysystem-google-cloud-storage": "^3.0"
     }
 }

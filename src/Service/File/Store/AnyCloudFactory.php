@@ -44,7 +44,6 @@ class AnyCloudFactory implements FactoryInterface
     {
         $this->createAwsAdapter();
         $this->createAzureAdapter();
-        $this->createRackspaceAdapter();
         $this->createDropboxAdapter();
         $this->createGoogleAdapter();
 
@@ -94,18 +93,6 @@ class AnyCloudFactory implements FactoryInterface
     }
 
     /**
-     * Create new Rackspace adapter.
-     */
-    private function createRackspaceAdapter(): void
-    {
-        if ($this->getAdapter() === 'rackspace') {
-            $adapter = new Adapter\RackspaceAdapter();
-            $this->createAdapter($adapter);
-            $this->createTempUri($adapter);
-        }
-    }
-
-    /**
      * Create new Dropbox adapter.
      */
     private function createDropboxAdapter(): void
@@ -133,13 +120,6 @@ class AnyCloudFactory implements FactoryInterface
      */
     private function createUri(): void
     {
-        if (in_array($this->getAdapter(), self::AWS_BASED, true)) {
-            $this->uri = dirname($this->filesystem->getAdapter()->getClient()->getObjectUrl(
-                $this->getSetting('bucket'),
-                $this->getSetting('key')
-            ));
-        } else {
-            $this->uri = $this->tempUri;
-        }
+        $this->uri = $this->tempUri;
     }
 }

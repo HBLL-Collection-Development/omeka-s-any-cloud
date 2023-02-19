@@ -13,7 +13,6 @@ This module allows you to store your Omeka S files on one of the following exter
 - [Wasabi Cloud Storage](https://wasabi.com) (uses the Amazon S3 Storage adapter)
 - [DigitalOcean Spaces](https://www.digitalocean.com/products/spaces/) (uses the Amazon S3 Storage adapter)
 - [Scaleway Object Storage](https://www.scaleway.com/object-storage/) (uses the Amazon S3 Storage adapter)
-- [Rackspace Files](https://www.rackspace.com/cloud/files)
 - [Dropbox](https://www.dropbox.com)
 
 It uses a filesystem abstraction system called [Flysystem](http://flysystem.thephpleague.com/docs/). You can build your own adapters to use with the system if there is a cloud storage system you would like to use but is not currently available via this module.
@@ -28,11 +27,7 @@ It is recommended that once you pick an external storage service you continue us
 After that, when you upload media for an item, it will upload to your selected cloud service rather than to your server’s local storage.
 
 ## Known Issues
-1. No migration from one cloud/filesystem to another. Pick one or manually transfer things if you decide to change services. 
-2. The Rackspace Files adapter currently relies on an outdated version of the Guzzle package which causes problems authenticating to the service. See [this forum posting](https://community.rackspace.com/products/f/dedicated-hybrid-hosting-forum/8674/rackspace-public-cloud-php-opencloud-sdk-errors-due-to-outdated-certificate-authority-list/14415) for the solution which involves downloading an updated security certificate and placing it in the correct directory in the `vendor` directory. There are several issues requesting a fix but I don’t know when those will be resolved. Until then, the instructions in that forum work well:
-   1. Download the updated certificate authority file here: <https://curl.haxx.se/ca/cacert.pem>
-   2. Replace Guzzle’s certificate authority file with the updated one. It is located at: `/path/to/omeka/modules/AnyCloud/vendor/guzzle/guzzle/src/Guzzle/Http/Resources/cacert.pem`
-3. There is also an authentication issue with Rackspace Files if you use Multi-Factor Authentication (MFA). MFA must be disabled on your account for this adapter to work. Hopefully both of these issues are addressed soon.
+1. No migration from one cloud/filesystem to another. Pick one or manually transfer things if you decide to change services.
 
 ## Warning
 Use this module at your own risk.
