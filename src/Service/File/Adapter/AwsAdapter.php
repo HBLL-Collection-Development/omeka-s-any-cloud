@@ -5,7 +5,7 @@ namespace AnyCloud\Service\File\Adapter;
 use AnyCloud\Traits\CommonTrait;
 use Aws\Exception\AwsException;
 use Aws\S3\S3Client;
-use League\Flysystem\AwsS3v3\AwsS3Adapter;
+use League\Flysystem\AwsS3V3\AwsS3V3Adapter;
 
 class AwsAdapter implements AdapterInterface
 {
@@ -17,12 +17,12 @@ class AwsAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function createAdapter($options): AwsS3Adapter
+    public function createAdapter($options): AwsS3V3Adapter
     {
         $this->options = $options;
         $this->createClient();
 
-        return new AwsS3Adapter($this->client, (string) $this->getSetting('bucket'));
+        return new AwsS3V3Adapter($this->client, (string) $this->getSetting('bucket'));
     }
 
     /**

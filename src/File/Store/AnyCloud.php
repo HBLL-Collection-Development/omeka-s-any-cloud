@@ -2,14 +2,16 @@
 
 namespace AnyCloud\File\Store;
 
-use League\Flysystem\AdapterInterface;
-use League\Flysystem\FileNotFoundException;
+use AnyCloud\Service\File\Store\AnyCloudFactory;
+use League\Flysystem\FilesystemException;
 use League\Flysystem\Filesystem;
+use League\Flysystem\Visibility;
 use Omeka\File\Exception\ConfigException;
 use Omeka\File\Store\StoreInterface;
 
 class AnyCloud implements StoreInterface
 {
+    private const AWS_BASED = ['aws', 'wasabi', 'digital_ocean', 'scaleway'];
     private $remoteFilesystem;
     private $configs;
     private $uri;
@@ -39,9 +41,11 @@ class AnyCloud implements StoreInterface
     {
         try {
             $contents = fopen($source, 'r');
-            $config = ['visibility' => AdapterInterface::VISIBILITY_PUBLIC];
-            $this->remoteFilesystem->put($storagePath, $contents, $config);
-            fclose($contents);
+            $config = ['visibility' => Visibility::PUBLIC];
+            $this->remoteFilesystem->writeStream($storagePath, $contents, $config);
+            if (is_resource($contents)) {
+                fclose($contents);
+            }
         } catch (ConfigException $e) {
             echo 'Any Cloud Error: '.$e->getMessage()."\n";
         }
@@ -54,7 +58,7 @@ class AnyCloud implements StoreInterface
     {
         try {
             $this->remoteFilesystem->delete($storagePath);
-        } catch (FileNotFoundException $e) {
+        } catch (FilesystemException $e) {
             echo 'Any Cloud Error: '.$e->getMessage()."\n";
         }
     }
@@ -64,9 +68,11 @@ class AnyCloud implements StoreInterface
      */
     public function getUri($storagePath): string
     {
-        // Kludgy solution to working with temporary Dropbox URIs
-        if ($this->uri === null && is_object($this->adapter)) {
-            return $this->adapter->getTemporaryLink($storagePath);
+        if (method_exists($this->adapter, 'getUrl')) {
+            // Kludgy solution to working with temporary Dropbox URIs
+            return $this->adapter->getUrl($storagePath);
+        } else {
+            return $this->remoteFilesystem->publicUrl($storagePath);
         }
         // Normal method for grabbing URIs from `AnyCloudFactory` (for everything except Dropbox)
         try {

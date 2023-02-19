@@ -4,8 +4,8 @@ namespace AnyCloud\Service\File\Adapter;
 
 use AnyCloud\Traits\CommonTrait;
 use Google\Cloud\Storage\StorageClient;
+use League\Flysystem\GoogleCloudStorage\GoogleCloudStorageAdapter;
 use Omeka\File\Exception\ConfigException;
-use Superbalist\Flysystem\GoogleStorage\GoogleStorageAdapter;
 
 class GoogleAdapter implements AdapterInterface
 {
@@ -17,13 +17,13 @@ class GoogleAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function createAdapter($options): GoogleStorageAdapter
+    public function createAdapter($options): GoogleCloudStorageAdapter
     {
         $this->options = $options;
         $this->createClient();
         $bucket = $this->client->bucket($this->getSetting('bucket_name'));
 
-        return new GoogleStorageAdapter($this->client, $bucket);
+        return new GoogleCloudStorageAdapter($bucket);
     }
 
     /**
