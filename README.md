@@ -4,6 +4,11 @@
 [![StyleCI](https://github.styleci.io/repos/167904424/shield)](https://github.styleci.io/repos/167904424)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2591621.svg)](https://doi.org/10.5281/zenodo.2591621)
 
+# HELP REQUESTED
+**I am not able to keep up with this module as I had hoped. I am looking for someone interested in being added to the project that can help keep this thing up and running. It is used enough that I think this is a solid module and serves a lot of people well. If you are interested, please drop me a line.**
+
+**I'd love to see this become a core part of Omeka-S out of the box because saving all media to a local server is not scalable for many projects. Having the ability to easily store on dedicated cloud storage systems is invaluable if you need anything at any kind of medium to large scale.**
+
 # Any Cloud Storage (Omeka S Module)
 This module allows you to store your Omeka S files on one of the following external cloud platforms rather than the local server disk:
 
