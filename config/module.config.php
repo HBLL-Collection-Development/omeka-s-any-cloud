@@ -16,6 +16,14 @@ return [
     'service_manager' => [
         'factories' => [
             File\Store\AnyCloud::class => Service\File\Store\AnyCloudFactory::class,
+
+            File\Store\Aws::class          => Service\File\Store\AwsFactory::class,
+            File\Store\Azure::class        => Service\File\Store\AzureFactory::class,
+            File\Store\DigitalOcean::class => Service\File\Store\DigitalOceanFactory::class,
+            File\Store\Dropbox::class      => Service\File\Store\DropboxFactory::class,
+            File\Store\Google::class       => Service\File\Store\GoogleFactory::class,
+            File\Store\Scaleway::class     => Service\File\Store\ScalewayFactory::class,
+            File\Store\Wasabi::class       => Service\File\Store\WasabiFactory::class,
         ],
     ],
     'anycloud' => [

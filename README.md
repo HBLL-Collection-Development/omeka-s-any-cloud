@@ -22,9 +22,154 @@ It is recommended that once you pick an external storage service you continue us
 ## Installation and Configuration
 1. Install the plugin by [downloading and unzipping the latest module](https://github.com/HBLL-Collection-Development/omeka-s-any-cloud/releases) and loading it into the `modules` directory of your Omeka S instance.
 2. Enable the plugin from the Admin side of your installation under “Modules”.
-3. Configure the module from the Admin side to include credentials for the cloud storage system you would like to use.
+3. Configure the module from the Admin side to include credentials for the cloud storage system you would like to use. You can also choose to configure the module from the `config/local.config.php` file (see [server-side configuration](#server-side-configuration))
 
 After that, when you upload media for an item, it will upload to your selected cloud service rather than to your server’s local storage.
+
+### Server-side configuration
+
+It's possible to configure the module entirely by editing the
+`config/local.config.php` file.
+
+First, you need to change the alias for `Omeka\File\Store` to the adapter you
+want to use, and then you have to configure the adapter itself inside the
+`file_store` section.
+
+For instance, if you want to use Dropbox, `config/local.config.php` should look like this:
+
+```php
+<?php
+
+return [
+    'service_manager' => [
+        'aliases' => [
+            'Omeka\File\Store' => 'AnyCloud\File\Store\Dropbox',
+        ],
+    ],
+    'file_store' => [
+        'dropbox' => [
+            'access_token' => 'YOUR_ACCESS_TOKEN',
+        ],
+    ],
+];
+```
+
+#### AWS
+
+Alias should be set to `AnyCloud\File\Store\Aws`.
+
+Available options:
+
+```php
+    'file_store' => [
+        'aws' => [
+            'key' => 'KEY',
+            'secret' => 'SECRET',
+            'region' => 'REGION',
+            'endpoint' => 'ENDPOINT',
+            'bucket' => 'BUCKET',
+        ],
+    ],
+```
+
+#### Azure
+
+Alias should be set to `AnyCloud\File\Store\Azure`.
+
+Available options:
+
+```php
+    'file_store' => [
+        'azure' => [
+            'account_name' => 'ACCOUNT_NAME',
+            'account_key' => 'ACCOUNT_KEY',
+            'container_name' => 'CONTAINER_NAME',
+        ],
+    ],
+```
+
+#### Digital Ocean
+
+Alias should be set to `AnyCloud\File\Store\DigitalOcean`.
+
+Available options:
+
+```php
+    'file_store' => [
+        'digital_ocean' => [
+            'key' => 'KEY',
+            'secret' => 'SECRET',
+            'region' => 'REGION',
+            'endpoint' => 'ENDPOINT',
+            'bucket' => 'BUCKET',
+        ],
+    ],
+```
+
+#### Dropbox
+
+Alias should be set to `AnyCloud\File\Store\Dropbox`.
+
+Available options:
+
+```php
+    'file_store' => [
+        'dropbox' => [
+            'access_token' => 'ACCESS_TOKEN',
+        ],
+    ],
+```
+
+#### Google
+
+Alias should be set to `AnyCloud\File\Store\Google`.
+
+Available options:
+
+```php
+    'file_store' => [
+        'google' => [
+            'project_id' => 'PROJECT_ID',
+            'credentials_path' => '/path/to/credentials.json', // This path is relative to AnyCloud's module path
+        ],
+    ],
+```
+
+#### Scaleway
+
+Alias should be set to `AnyCloud\File\Store\Scaleway`.
+
+Available options:
+
+```php
+    'file_store' => [
+        'scaleway' => [
+            'key' => 'KEY',
+            'secret' => 'SECRET',
+            'region' => 'REGION',
+            'endpoint' => 'ENDPOINT',
+            'bucket' => 'BUCKET',
+        ],
+    ],
+```
+
+#### Wasabi
+
+Alias should be set to `AnyCloud\File\Store\Wasabi`.
+
+Available options:
+
+```php
+    'file_store' => [
+        'wasabi' => [
+            'key' => 'KEY',
+            'secret' => 'SECRET',
+            'region' => 'REGION',
+            'endpoint' => 'ENDPOINT',
+            'bucket' => 'BUCKET',
+        ],
+    ],
+```
 
 ## Known Issues
 1. No migration from one cloud/filesystem to another. Pick one or manually transfer things if you decide to change services.

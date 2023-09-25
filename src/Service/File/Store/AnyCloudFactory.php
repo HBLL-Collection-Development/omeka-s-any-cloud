@@ -2,124 +2,39 @@
 
 namespace AnyCloud\Service\File\Store;
 
-use AnyCloud\File\Store\AnyCloud;
-use AnyCloud\Service\File\Adapter;
-use AnyCloud\Traits\CommonTrait;
+use AnyCloud\File\Store;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use League\Flysystem\Filesystem;
 
 class AnyCloudFactory implements FactoryInterface
 {
-    use CommonTrait;
-
-    private const AWS_BASED = ['aws', 'wasabi', 'digital_ocean', 'scaleway'];
-
-    protected $options;
-    private $filesystem;
-    private $uri;
-    private $tempUri;
-    private $adapter;
+    const SERVICE_NAMES = [
+        'aws'           => Store\Aws::class,
+        'azure'         => Store\Azure::class,
+        'digital_ocean' => Store\DigitalOcean::class,
+        'dropbox'       => Store\Dropbox::class,
+        'google'        => Store\Google::class,
+        'scaleway'      => Store\Scaleway::class,
+        'wasabi'        => Store\Wasabi::class,
+    ];
 
     /**
      * @param ContainerInterface $serviceLocator
      * @param string             $requestedName
      * @param array|null         $options
      *
-     * @return AnyCloud|object
+     * @return \Omeka\File\Store\StoreInterface
      */
     public function __invoke(ContainerInterface $serviceLocator, $requestedName, array $options = null)
     {
-        $this->options = $serviceLocator->get('Omeka\Settings');
-        $this->createFilesystem();
-        $this->createUri();
+        $settings = $serviceLocator->get('Omeka\Settings');
+        $anycloud_adapter = $settings->get('anycloud_adapter', []);
+        $adapter = $anycloud_adapter['adapter'];
 
-        return new AnyCloud($this->filesystem, $this->options, $this->uri, $this->adapter);
-    }
-
-    /**
-     * Create the Filesystem object.
-     */
-    private function createFilesystem(): void
-    {
-        $this->createAwsAdapter();
-        $this->createAzureAdapter();
-        $this->createDropboxAdapter();
-        $this->createGoogleAdapter();
-
-        $this->filesystem = new Filesystem($this->adapter);
-    }
-
-    /**
-     * Create adapter.
-     *
-     * @param object $adapter Adapter to create
-     */
-    private function createAdapter($adapter): void
-    {
-        $this->adapter = $adapter->createAdapter($this->options);
-    }
-
-    /**
-     * Create a temporary URI to store the file before saving.
-     *
-     * @param object $adapter Adapter to create a temporary URI for
-     */
-    private function createTempUri($adapter): void
-    {
-        $this->tempUri = $adapter->getUri();
-    }
-
-    /**
-     * Create new AWS adapter.
-     */
-    private function createAwsAdapter(): void
-    {
-        if (in_array($this->getAdapter(), self::AWS_BASED, true)) {
-            $this->createAdapter(new Adapter\AwsAdapter());
+        if (array_key_exists($adapter, self::SERVICE_NAMES)) {
+            return $serviceLocator->get(self::SERVICE_NAMES[$adapter]);
         }
-    }
 
-    /**
-     * Create new Azure adapter.
-     */
-    private function createAzureAdapter(): void
-    {
-        if ($this->getAdapter() === 'azure') {
-            $adapter = new Adapter\AzureAdapter();
-            $this->createAdapter($adapter);
-            $this->createTempUri($adapter);
-        }
-    }
-
-    /**
-     * Create new Dropbox adapter.
-     */
-    private function createDropboxAdapter(): void
-    {
-        if ($this->getAdapter() === 'dropbox') {
-            $adapter = new Adapter\DropboxAdapter();
-            $this->createAdapter($adapter);
-        }
-    }
-
-    /**
-     * Create new Google adapter.
-     */
-    private function createGoogleAdapter(): void
-    {
-        if ($this->getAdapter() === 'google') {
-            $adapter = new Adapter\GoogleAdapter();
-            $this->createAdapter($adapter);
-            $this->createTempUri($adapter);
-        }
-    }
-
-    /**
-     * Create URI for file.
-     */
-    private function createUri(): void
-    {
-        $this->uri = $this->tempUri;
+        throw new \Omeka\Service\Exception\ConfigException('Bad value for anycloud_adapter: '.$adapter);
     }
 }
