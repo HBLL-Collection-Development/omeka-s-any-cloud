@@ -11,4 +11,13 @@ We accept contributions via Pull Requests on [Github](https://github.com/hbll-co
 - **One pull request per feature** - If you want to do more than one thing, send multiple pull requests.
 - **Send coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please [squash them](http://www.git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages) before submitting.
 
+## Creating Releases
+If you have access to create releases, please note the following:
+- Releases are created automatically when you create a semantically versioned `tag` (**not** a release using the GitHub web interface)
+- Before creating a `tag` please ensure the following:
+  - `CHANGELOG.md` has been updated appropriately
+  - `RELEASE.md` has been updated appropriately—the text of this file will be what is added to the release notes created by the `.github/workflows/release.yml` action
+  - `README.md` has been updated appropriately
+  - `composer.lock` is correct—the GitHub action will use whatever version of dependencies in the lock file
+
 **Happy coding**!
