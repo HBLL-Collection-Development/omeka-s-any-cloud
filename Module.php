@@ -94,6 +94,18 @@ class Module extends AbstractModule
         }
         $form->init();
         $form->setData($data);
+
+        // Disable fieldset if corresponding section exists in local.config.php
+        foreach (['aws', 'azure', 'digital_ocean', 'dropbox', 'google', 'scaleway', 'wasabi'] as $key) {
+            if (isset($config['file_store'][$key])) {
+                $fieldset = $form->get("anycloud_$key");
+                $fieldset->setLabel($fieldset->getLabel().' (disabled because configuration exists in local.config.php)');
+                foreach ($fieldset->getElements() as $element) {
+                    $element->setAttribute('disabled', true);
+                }
+            }
+        }
+
         $html = $renderer->render('anycloud/module/config', [
             'form' => $form,
         ]);
