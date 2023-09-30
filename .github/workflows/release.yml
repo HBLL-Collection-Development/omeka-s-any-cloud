@@ -23,9 +23,10 @@ jobs:
         uses: "thedoctor0/zip-release@master"
         with:
           filename: "AnyCloud.zip"
-          exclusions: "*.git* .editorconfig .scrutinizer.yml CODE_OF_CONDUCT.md CONTRIBUTING.md CONTRIBUTORS.md PULL_REQUEST_TEMPLATE.md phpcs.xml.dist"
+          exclusions: "*.git* .editorconfig .scrutinizer.yml CODE_OF_CONDUCT.md CONTRIBUTING.md CONTRIBUTORS.md phpcs.xml.dist"
       - name: Upload Release
         uses: ncipollo/release-action@v1
         with:
           artifacts: 'AnyCloud.zip'
+          bodyFile: "RELEASE.md"
           token: ${{ secrets.GITHUB_TOKEN }}
