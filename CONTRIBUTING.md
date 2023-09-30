@@ -16,7 +16,7 @@ If you have access to create releases, please note the following:
 - Releases are created automatically when you create a semantically versioned `tag` (**not** a release using the GitHub web interface)
 - Before creating a `tag` please ensure the following:
   - `CHANGELOG.md` has been updated appropriately
-  - `RELEASE.md` has been updated appropriately—the text of this file will be what is added to the release notes created by the `.github/workflows/release.yml` action
+  - `RELEASE.md` has been updated appropriately—the text of this file will be what is added to the release notes created by the `.github/workflows/release.yml` action. Often this will be the section of the `CHANGELOG.md` for this release but may include more information relevant to this release
   - `README.md` has been updated appropriately
   - `composer.lock` is correct—the GitHub action will use whatever version of dependencies in the lock file
 
