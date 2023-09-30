@@ -19,5 +19,6 @@ If you have access to create releases, please note the following:
   - `RELEASE.md` has been updated appropriately—the text of this file will be what is added to the release notes created by the `.github/workflows/release.yml` action. Often this will be the section of the `CHANGELOG.md` for this release but may include more information relevant to this release
   - `README.md` has been updated appropriately
   - `composer.lock` is correct—the GitHub action will use whatever version of dependencies in the lock file
+  - `config/module.ini` has the correct version that matches the tag you wish to create
 
 **Happy coding**!
