@@ -25,7 +25,7 @@ jobs:
         uses: "thedoctor0/zip-release@master"
         with:
           filename: "AnyCloud.zip"
-          exclusions: "*.git* UpdateModuleIni.php .editorconfig .scrutinizer.yml CODE_OF_CONDUCT.md CONTRIBUTING.md CONTRIBUTORS.md phpcs.xml.dist"
+          exclusions: "*.git* UpdateModuleIni.php .editorconfig .scrutinizer.yml CODE_OF_CONDUCT.md CONTRIBUTING.md CONTRIBUTORS.md RELEASE.md phpcs.xml.dist"
       - name: "Upload Release"
         uses: "ncipollo/release-action@v1"
         with:
