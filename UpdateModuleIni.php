@@ -1,24 +1,17 @@
 <?php
 
-$version = substr($argv[1], 1);
+// Get version from the tag name passed from `release.yml` action
+// Strip prefix `v` if it exists
+$version = ltrim($argv[1], 'v');
 
-$format = <<<INI
-[info]
-name         = "Any Cloud"
-description  = "Omeka S module for storing items in the cloud storage of your choice."
-tags         = "amazon s3 aws, wasabi, azure, digital ocean, dropbox, google, scaleway, storage, file system"
-author       = "Jared Howland, Jon Fackrell, & Julian Maurice"
-author_link  = "https://www.jaredhowland.com"
-version      = "%s"
-configurable = true
-module_link  = "https://github.com/HBLL-Collection-Development/omeka-s-any-cloud"
-support_link = "https://github.com/HBLL-Collection-Development/omeka-s-any-cloud/issues"
-license      = "MIT"
-omeka_version_constraint = "^3.0.0||^4.0.0"
+// Get `module.ini` content
+$ini = file_get_contents('./config/module.ini');
 
-INI;
+// Replace `%s` with correct version from the tag name
+$file = sprintf($ini, $version);
 
-$ini = sprintf($format, $version);
+// Open the `module.ini` file
+$fp = fopen('./config/module.ini', 'w');
 
-$fp = fopen('config/module.ini', 'w');
-fwrite($fp, $ini);
+// Replace contents with the new version number
+fwrite($fp, $file);
