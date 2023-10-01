@@ -1,12 +1,24 @@
+<?php
+
+$version = substr($argv[1], 1);
+
+$format = <<<INI
 [info]
 name         = "Any Cloud"
 description  = "Omeka S module for storing items in the cloud storage of your choice."
 tags         = "amazon s3 aws, wasabi, azure, digital ocean, dropbox, google, scaleway, storage, file system"
 author       = "Jared Howland, Jon Fackrell, & Julian Maurice"
 author_link  = "https://www.jaredhowland.com"
-version      = "3.1.1"
+version      = "%s"
 configurable = true
 module_link  = "https://github.com/HBLL-Collection-Development/omeka-s-any-cloud"
 support_link = "https://github.com/HBLL-Collection-Development/omeka-s-any-cloud/issues"
 license      = "MIT"
 omeka_version_constraint = "^3.0.0||^4.0.0"
+
+INI;
+
+$ini = sprintf($format, $version);
+
+$fp = fopen('config/module.ini', 'w');
+fwrite($fp, $ini);
