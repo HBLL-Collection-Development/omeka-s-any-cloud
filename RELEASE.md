@@ -1,1 +1,1 @@
-Automatically update version number in `module.ini` using a GitHub action from the tag name.
+Update to auto update script to make it more robust.
