@@ -2,7 +2,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/HBLL-Collection-Development/omeka-s-any-cloud/badges/build.png?b=master)](https://scrutinizer-ci.com/g/HBLL-Collection-Development/omeka-s-any-cloud/build-status/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/88231b9bfaa4e0397ef9/maintainability)](https://codeclimate.com/github/HBLL-Collection-Development/omeka-s-any-cloud/maintainability)
 [![StyleCI](https://github.styleci.io/repos/167904424/shield)](https://github.styleci.io/repos/167904424)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2591621.svg)](https://doi.org/10.5281/zenodo.2591621)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8400100.svg)](https://doi.org/10.5281/zenodo.8400100)
 
 # Any Cloud Storage (Omeka S Module)
 This module allows you to store your Omeka S files on one of the following external cloud platforms rather than the local server disk:
