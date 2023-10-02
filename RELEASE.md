@@ -1,1 +1,1 @@
-Update to auto update script to make it more robust.
+Automatically zip up and create a release when you push a tag. It will automatically fix the version number in `config/module.ini` based on the tag name in the zip file in case you forget to do it before creating the release.
