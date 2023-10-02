@@ -32,7 +32,7 @@ If you have access to create releases, please note the following:
       this release but may include more information relevant to this release
     - `README.md` has been updated appropriately
     - `composer.lock` is correct—the GitHub action will use whatever version of dependencies in the lock file
-    - `config/module.ini` is created dynamically by the GitHub action using the data in `UpdateModuleIni.php` and the
-      name of the tag
+    - `config/module.ini` is created updated by the GitHub action using the data in `UpdateModuleIni.php` and the
+      name of the tag. You should keep this up to date but, in case you forget, once you create a tag it will update the `config/module.ini` with the correct version in the zip file in case you forget before pushing the tag.
 
 **Happy coding**!
