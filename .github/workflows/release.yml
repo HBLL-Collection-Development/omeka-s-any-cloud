@@ -11,24 +11,27 @@ jobs:
     steps:
       - name: "Checkout repository"
         uses: "actions/checkout@master"
+        with:
+            path: "AnyCloud/"
       - name: "Set up PHP"
         uses: "shivammathur/setup-php@v2"
         with:
           php-version: "latest"
       - name: "Update version number in `module.ini`"
-        run: php UpdateModuleIni.php ${GITHUB_REF##*/}
+        run: php AnyCloud/UpdateModuleIni.php ${GITHUB_REF##*/}
       - name: "Composer install"
         uses: "ramsey/composer-install@v2"
         with:
+          working-directory: "AnyCloud/"
           composer-options: "--ignore-platform-reqs --optimize-autoloader"
       - name: "Create archive release"
         uses: "thedoctor0/zip-release@master"
         with:
           filename: "AnyCloud.zip"
-          exclusions: "*.git* UpdateModuleIni.php .editorconfig .scrutinizer.yml CODE_OF_CONDUCT.md CONTRIBUTING.md CONTRIBUTORS.md RELEASE.md phpcs.xml.dist"
+          exclusions: "AnyCloud/*.git* AnyCloud/UpdateModuleIni.php AnyCloud/.editorconfig AnyCloud/.scrutinizer.yml AnyCloud/CODE_OF_CONDUCT.md AnyCloud/CONTRIBUTING.md AnyCloud/CONTRIBUTORS.md AnyCloud/RELEASE.md AnyCloud/phpcs.xml.dist"
       - name: "Upload Release"
         uses: "ncipollo/release-action@v1"
         with:
           artifacts: "AnyCloud.zip"
-          bodyFile: "RELEASE.md"
+          bodyFile: "AnyCloud/RELEASE.md"
           token: ${{ secrets.GITHUB_TOKEN }}
