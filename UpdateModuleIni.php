@@ -5,13 +5,13 @@
 $version = ltrim($argv[1], 'v');
 
 // Get `module.ini` content
-$ini = file_get_contents('./config/module.ini');
+$ini = file_get_contents('./AnyCloud/config/module.ini');
 
-// Replace `%s` with correct version from the tag name
-$file = sprintf($ini, $version);
+// Replace with correct version from the tag name
+$file = preg_replace('/(version\s*=\s)\"(.*?)\"(.*?)\n/', '$1"'.$version.'"$3'."\n", $ini);
 
 // Open the `module.ini` file
-$fp = fopen('./config/module.ini', 'w');
+$fp = fopen('./AnyCloud/config/module.ini', 'w');
 
 // Replace contents with the new version number
 fwrite($fp, $file);
