@@ -5,7 +5,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2591621.svg)](https://doi.org/10.5281/zenodo.2591621)
 
 # Any Cloud Storage (Omeka S Module)
-This module allows you to store your Omeka S files on one of the following external cloud platforms rather than the local server disk:
+This module allows you to store your [Omeka S](https://omeka.org/s/) files on one of the following external cloud platforms rather than the local server disk:
 
 - [Amazon S3 Storage](https://aws.amazon.com/s3/)
 - [Microsoft Azure Storage](https://azure.microsoft.com/en-us/services/storage/)
@@ -20,7 +20,7 @@ It uses a filesystem abstraction system called [Flysystem](http://flysystem.thep
 It is recommended that once you pick an external storage service you continue using it as migrating to a different external file system is not currently supported.
 
 ## Installation and Configuration
-1. Install the plugin by [downloading and unzipping the latest module](https://github.com/HBLL-Collection-Development/omeka-s-any-cloud/releases) and loading it into the `modules` directory of your Omeka S instance.
+1. Install the plugin by [downloading and unzipping the latest module](https://github.com/HBLL-Collection-Development/omeka-s-any-cloud/releases) and loading it into the `modules` directory of your [Omeka S](https://omeka.org/s/) instance.
 2. Enable the plugin from the Admin side of your installation under “Modules”.
 3. Configure the module from the Admin side to include credentials for the cloud storage system you would like to use. You can also choose to configure the module from the `config/local.config.php` file (see [server-side configuration](#server-side-configuration))
 
