@@ -24,7 +24,10 @@ class Flysystem implements StoreInterface
 
         $config = ['visibility' => Visibility::PUBLIC];
         $this->filesystem->writeStream($storagePath, $fh, $config);
-        fclose($fh);
+
+        if (is_resource($fh)) {
+            fclose($fh);
+        }
     }
 
     public function delete($storagePath)
