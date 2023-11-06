@@ -13,7 +13,7 @@ abstract class AbstractAwsS3V3Factory extends AbstractFlysystemFactory
         $options = [
             'credentials' => [
                 'key'    => $config['key'],
-                'secret' => $config['secret'],
+                'secret' => $config['secret'] ?? $config['secret_key'],
             ],
             'region'   => $config['region'],
             'endpoint' => $config['endpoint'],
