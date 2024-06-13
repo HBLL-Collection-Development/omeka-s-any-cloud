@@ -3,6 +3,7 @@
 namespace AnyCloud\Service\File\Store;
 
 use League\Flysystem\AzureBlobStorage\AzureBlobStorageAdapter;
+use League\Flysystem\FilesystemAdapter;
 use MicrosoftAzure\Storage\Blob\BlobRestProxy;
 
 class AzureFactory extends AbstractFlysystemFactory
