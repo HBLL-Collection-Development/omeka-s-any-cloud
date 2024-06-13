@@ -1,1 +1,1 @@
-- Closes #44
+- Add missing use statement in AzureFactory (#49)
